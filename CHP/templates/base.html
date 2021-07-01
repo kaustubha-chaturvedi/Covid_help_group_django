@@ -11,10 +11,13 @@
     <link rel="stylesheet" href="{% static 'css/tabler-icons.min.css' %}">
     <title>ICGH</title>
 </head>
-<body class="">
+<body>
     {% include 'partials/nav.html' %}
     {% block body %}{% endblock body %}
     <script src="{% static 'js/materialize.min.js' %}"></script>
     <script src="{% static 'js/alpine.min.js' %}"></script>
 </body>
+<footer class="sticky bottom-0 w-full z-50">
+{% block footer %}{% endblock footer %}
+</footer>
 </html>

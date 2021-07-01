@@ -1,3 +1,6 @@
 from django.contrib import admin
+from CHP.models import *
 
-# Register your models here.
+@admin.register(Categories)
+class CategoriesModelAdmin(admin.ModelAdmin):
+    list_display=['id','name','icon']

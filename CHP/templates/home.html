@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row">
+     <div class="hero mx-auto bg-white w-100 py-4 sticky z-40">
+        <img class="rounded-2xl w-11/12 mx-auto object-contain shadow-lg" src="https://images.moneycontrol.com/static-mcnews/2021/04/Modi-770x433.jpg" alt="">
+    </div> 
+    <script>
+        topHeight = document.querySelector('#mainNav').clientHeight;
+        document.querySelector('.hero').setAttribute('style','top:'+topHeight+'px!important');
+    </script>
+    <div class="grid gap-4 grid-cols-3 homeGrid mx-4">
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+        <div class="red rounded-lg p-12"></div>
+    </div>
+    <div id="bottomNav" class="fixed bottom-0 w-full z-50">
+        <div class="flex h-full items-center justify-around teal accent-3 p-2">
+            <a href="#" class="no-underline text-center text-black">
+               <i class="ti ti-2x ti-home"></i>
+               <br>
+               <p class="font-semibold">Home</p> 
+            </a>
+            <a href="#" class="no-underline text-center text-black">
+                <i class="ti ti-2x ti-news"></i>
+                <br>
+                <p class="font-semibold">News</p> 
+             </a>
+             <a href="#" class="no-underline text-center text-black">
+                <i class="ti ti-2x ti-report-medical"></i>
+                <br>
+                <p class="font-semibold">Medical</p> 
+             </a>
+             <a href="#" class="no-underline text-center text-black">
+                <i class="ti ti-2x ti-ambulance"></i>
+                <br>
+                <p class="font-semibold">Ambulance</p> 
+             </a>
+        </div>
+    </div>
+</div>
+{% endblock body %}

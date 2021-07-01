@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tabler resizing option */
+.ti-xs{font-size: 0.75em!important;}
+.ti-sm{font-size: 0.875em!important;}
+.ti-lg{font-size: 1.33em!important; vertical-align: -25%;}
+.ti-2x{font-size: 2em!important;}
+.ti-3x{font-size: 3em!important;}
+.ti-4x{font-size: 4em!important;}
+.ti-5x{font-size: 5em!important;}
+.ti-6x{font-size: 6em!important;}
+.ti-7x{font-size: 7em!important;}
+.ti-8x{font-size: 8em!important;}
+.ti-9x{font-size: 9em!important;}
+.ti-10x{font-size: 10em!important;}
+/* tabler resizing option */

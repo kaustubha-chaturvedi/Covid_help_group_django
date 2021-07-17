@@ -13,6 +13,9 @@
 </head>
 <body>
     {% include 'partials/nav.html' %}
+    <script>
+        document.querySelector('a[id="appTitle"]').innerHTML="{% block navTitle %}{% endblock navTitle %}"
+    </script>
     {% block body %}{% endblock body %}
     <script src="{% static 'js/materialize.min.js' %}"></script>
     <script src="{% static 'js/alpine.min.js' %}"></script>

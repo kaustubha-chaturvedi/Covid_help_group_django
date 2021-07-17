@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
+{% block navTitle %}ICHG{% endblock navTitle %}
 {% block body %}
-<div class="row">
-    <div class="hero mx-auto hide-on-large-only bg-white w-100 py-4 sticky z-40">
-        <img class="rounded-2xl w-4/5 mx-auto object-contain shadow-lg" src="https://images.moneycontrol.com/static-mcnews/2021/04/Modi-770x433.jpg" alt="">
-    </div> 
-    <script>
-        topHeight = document.querySelector('#mainNav').clientHeight;
-        document.querySelector('.hero').setAttribute('style','top:'+topHeight+'px!important');
-    </script>
-    <div class="grid gap-4 grid-cols-3 homeGrid mx-4 my-2">
-        {% for category in categories %}
-        <a href="#" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
-            <i class="ti ti-3x ti-ball-volleyball"></i>
-            {{category.name}}
-        </a>
-        {% endfor %}
-    </div>
+<div class="hero mx-auto hide-on-large-only bg-white w-100 py-4 sticky z-40">
+    <img class="rounded-2xl w-4/5 mx-auto object-contain shadow-lg" src="https://images.moneycontrol.com/static-mcnews/2021/04/Modi-770x433.jpg" alt="">
+</div> 
+<script>
+    topHeight = document.querySelector('#mainNav').clientHeight;
+    document.querySelector('.hero').setAttribute('style','top:'+topHeight+'px!important');
+</script>
+<div class="grid gap-4 grid-cols-3 homeGrid mx-4 my-2">
+    {% for category in categories %}
+    <a href="/breifpage/{{category.name}}" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
+        <i class="ti ti-3x ti-ball-volleyball"></i>
+        {{category.name}}
+    </a>
+    {% endfor %}
 </div>
 {% endblock body %}
+
 {% block footer %}
 <div class="flex hide-on-large-only h-full items-center justify-around teal accent-3 p-2">
     <a href="#" class="no-underline text-center text-black">

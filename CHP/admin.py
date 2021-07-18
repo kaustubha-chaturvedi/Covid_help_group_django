@@ -7,3 +7,7 @@ admin.site.site_header="ICHG Admin"
 @admin.register(Categories)
 class CategoriesModelAdmin(admin.ModelAdmin):
     list_display=['name','id']
+
+@admin.register(AllData)
+class AllDataAdmin(admin.ModelAdmin):
+    list_display=['category','data']

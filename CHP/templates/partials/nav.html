@@ -19,21 +19,30 @@
             <a id="userBtn" class="btn-floating btn-large waves-effect waves-light z-depth-0 indigo lighten-1"><i class="ti ti-2x ti-user"></i></a>    
         </div>
         <div id="topnav">
-            <li><a href="#">Menu Item</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="#">Menu Item</a></li>
             <li><a href="#">Menu Item</a></li>
             <li><a href="#">Menu Item</a></li>
         </div>
     </div>
     <div>
-        <hr class="h-0.5 w-11/12 bg-gray-400 mx-auto">
-        <li><a href="#"><i class="ti ti-lg ti-login"></i> Sign In</a></li>
-        <li><a href="#"><i class="ti ti-lg ti-user-plus"></i> Sign UP</a></li>
+      <hr class="h-0.5 w-11/12 bg-gray-400 mx-auto">
+      {% if not request.user.is_authenticated %}
+      <li><a href="/signin"><i class="ti ti-lg ti-login"></i> Sign In</a></li>
+      <li><a href="/signup"><i class="ti ti-lg ti-user-plus"></i> Sign Up</a></li>
+      {% else %}
+      <li><a href="/signout"><i class="ti ti-lg ti-logout"></i> Sign Out</a></li>
+      {% endif %}
     </div>
   </ul>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems);
+  });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
   });
   </script>

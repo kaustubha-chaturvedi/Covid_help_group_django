@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navTitle %}Sign Up{% endblock navTitle %}
+{% block body %}
+<div class="container ">
+    <form action="" method="post">
+    {% csrf_token %}
+    {% for el in form %}
+        <div class="container">
+            <div class="input-field">
+                {{el}}
+            </div>
+        <small class="orange accent-2">{{el.errors|striptags}}</small>
+        </div>
+    {% endfor %}
+    <center>
+    <button type="submit" class="btn blue lighten-2">Submit</button>
+    </center>
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <small class="orange accent-2">{{error}}</small>
+        {% endfor %}
+    {% endif %}
+    </form>
+</div>
+{% endblock body %}

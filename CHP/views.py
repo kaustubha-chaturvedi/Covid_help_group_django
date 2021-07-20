@@ -14,15 +14,18 @@ def breifPage(request,category):
     return render(request,'breifPage.html',{'category':category})
 
 def user_signup(request):
-    if request.method == "POST":
-        form = SignUp(request.POST)
-        if form.is_valid():
-            user = form.save()
-            group = Group.objects.get(name="Subscriber") 
-            user.groups.add(group)
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            form = SignUp(request.POST)
+            if form.is_valid():
+                user = form.save()
+                group = Group.objects.get(name="Subscriber") 
+                user.groups.add(group)
+        else:
+            form = SignUp()
+        return render(request, 'signup.html', {'form':form})
     else:
-        form = SignUp()
-    return render(request, 'signup.html', {'form':form})
+        return HttpResponseRedirect('/dashboard')
 
 def user_login(request):
     if not request.user.is_authenticated:
@@ -34,13 +37,19 @@ def user_login(request):
                 user = authenticate(username=email,password=upass)
                 if user is not None:
                     login(request,user)
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect('/dashboard')
         else:
             form = Login()
-        return render(request, 'login.html',{'form':form})
+            return render(request, 'login.html',{'form':form})
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/dashboard')
 
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+def dashboard(request):
+    if request.user.is_authenticated:
+        return render(request,'dashboard.html',{'user':request.user})
+    else:
+        return HttpResponseRedirect('/signin')

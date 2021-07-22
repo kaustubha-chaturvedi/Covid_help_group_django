@@ -53,3 +53,10 @@ def dashboard(request):
         return render(request,'dashboard.html',{'user':request.user})
     else:
         return HttpResponseRedirect('/signin')
+
+def manage_users(request):
+    if request.user.is_authenticated:
+        allusers = User.objects.all()
+        return render(request,'partials/manage-users.html',{'users':allusers})
+    else:
+        return render('/signin')

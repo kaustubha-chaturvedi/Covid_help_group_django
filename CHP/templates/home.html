@@ -8,7 +8,7 @@
     topHeight = document.querySelector('#mainNav').clientHeight;
     document.querySelector('.hero').setAttribute('style','top:'+topHeight+'px!important');
 </script>
-<div class="grid gap-4 grid-cols-3 homeGrid mx-4 my-2">
+<div class="grid gap-4 grid-cols-3 mx-4 my-2">
     {% for category in categories %}
     <a href="/breifpage/{{category.name}}" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
         <i class="ti ti-3x ti-ball-volleyball"></i>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navTitle %}Manage Categories{% endblock navTitle %}
+{% block body %}
+<div class="mx-4 my-8 overflow-x-auto">
+    <table class="centered striped">
+        <thead class="bg-gray-200">
+            <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        {% if user.is_superuser is not True %}
+            <tr>
+                <td>{{user.full_name}}</td>
+                <td>{{user.email}}</td>
+                {% for userGroup in user.groups.all %}
+                <td>{{userGroup}}</td>
+                {% endfor %}
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}

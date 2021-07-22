@@ -7,5 +7,6 @@ urlpatterns=[
     path('signin',user_login),
     path('signout',user_logout),
     path('dashboard',dashboard),
+    path('manage-users',manage_users),
     path('breifpage/<str:category>',breifPage)
 ]

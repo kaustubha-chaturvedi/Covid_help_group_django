@@ -8,25 +8,20 @@ admin.site.site_header="ICHG Admin"
 #Admin Settings
 
 class CustomUserAdmin(UserAdmin):
-    add_form = SignUp
-    form = CustomUserChangeFormForAdmin
-    model = User
     list_display = ('email', 'is_staff', 'is_active',)
-    list_filter = ('email', 'is_staff', 'is_active',)
+    list_filter = ('is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email','first_name','last_name','date_joined','password')}),
-        ('Permissions', {'fields': ('is_staff', 'is_active')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active','is_superuser')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_active','is_superuser')}
         ),
     )
     search_fields = ('email',)
     ordering = ('email',)
-
-
 admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Categories)

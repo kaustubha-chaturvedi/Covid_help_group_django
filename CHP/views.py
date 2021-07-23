@@ -1,5 +1,6 @@
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.models import Group
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -7,6 +8,7 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.template.loader import render_to_string
 from CHP.token import account_activation_token
 from django.core.mail import EmailMessage
+from django.contrib import messages
 from CHP.models import *
 from CHP.forms import *
 
@@ -40,7 +42,8 @@ def user_signup(request):
                             mail_subject, message, to=[to_email]
                 )
                 email.send()
-                return HttpResponse('Please confirm your email address to complete the registration')
+                messages.success(request, 'Form submission successful Activation Link Was sent to email')
+                return HttpResponseRedirect('/signin')
         else:
             form = SignUp()
         return render(request, 'signup.html', {'form':form})
@@ -57,11 +60,27 @@ def user_activation(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        messages = ['Email Verrified Successfully']
+        messages.success(request, 'Account Activated')
         return HttpResponseRedirect('/signin')
     else:
-        return HttpResponse('Activation link is invalid!')
+        messages.success(request,'Activation link is invalid!')
+        return HttpResponseRedirect('/signup')
 
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return HttpResponseRedirect('/change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'partials/changepass.html', {
+        'form': form
+    })
 
 def user_login(request):
     if not request.user.is_authenticated:
@@ -76,8 +95,7 @@ def user_login(request):
                     return HttpResponseRedirect('/dashboard')
         else:
             form = Login()
-            messages = ['']
-            return render(request, 'login.html',{'form':form,'messages':messages})
+            return render(request, 'login.html',{'form':form})
     else:
         return HttpResponseRedirect('/dashboard')
 

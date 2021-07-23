@@ -3,6 +3,11 @@
 {% block navTitle %}Sign Up{% endblock navTitle %}
 {% block body %}
 <div class="container ">
+    {% if messages %}
+        {% for message in messages %}
+            <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
+        {% endfor %}
+    {% endif %}
     <form action="" method="post">
     {% csrf_token %}
     {% for el in form %}

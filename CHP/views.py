@@ -28,11 +28,11 @@ def user_signup(request):
                 group = Group.objects.get(name="Subscriber") 
                 user.groups.add(group)
                 current_site = get_current_site(request)
-                mail_subject = 'Activate your blog account.'
+                mail_subject = 'Activate your ICHG account.'
                 message = render_to_string('partials/email_template.html', {
                     'user': user,
                     'domain': current_site.domain,
-                    'uid':urlsafe_base64_encode(force_bytes(user.pk)).decode()  ,
+                    'uid':urlsafe_base64_encode(force_bytes(user.pk))  ,
                     'token':account_activation_token.make_token(user),
                 })
                 to_email = form.cleaned_data.get('email')

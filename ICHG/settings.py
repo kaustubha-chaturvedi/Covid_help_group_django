@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "CHP.User"
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ichgtechteam@gmail.com'
+EMAIL_HOST_PASSWORD = 'zgyrlrocwntiuaxy'
+EMAIL_PORT = 587
 
 # Application definition
 

@@ -3,6 +3,9 @@
 {% block navTitle %}Sign In{% endblock navTitle %}
 {% block body %}
 <div class="container ">
+    {% for message in messages %}
+        <small class="orange accent-2">{{message}}</small>
+    {% endfor %}
     <form action="" method="post">
     {% csrf_token %}
     {% for el in form %}

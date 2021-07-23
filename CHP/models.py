@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('first name'),max_length=150,blank=True)
     last_name = models.CharField(_('last name'),max_length=150,blank=True)
     is_staff = models.BooleanField(_('staff status'),default=False)
-    is_active = models.BooleanField(_('active'),default=True)
+    is_active = models.BooleanField(_('active'),default=False)
     is_superuser = models.BooleanField(_('superuser'),default=False)
     date_joined = models.DateTimeField(_('date joined'),default=timezone.now)
   
@@ -98,3 +98,4 @@ class Categories(models.Model):
 class AllData(models.Model):
     category = models.ForeignKey(Categories,related_name="category",on_delete=models.DO_NOTHING)
     data = models.JSONField()
+    isShown = models.BooleanField(default=False)

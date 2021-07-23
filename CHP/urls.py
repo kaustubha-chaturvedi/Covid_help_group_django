@@ -8,5 +8,6 @@ urlpatterns=[
     path('signout',user_logout),
     path('dashboard',dashboard),
     path('manage-users',manage_users),
-    path('breifpage/<str:category>',breifPage)
+    path('breifpage/<str:category>',breifPage),
+    path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',user_activation, name='activate'),
 ]

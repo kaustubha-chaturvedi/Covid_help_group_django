@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block navTitle %}Confirm password{% endblock navTitle %}
+{% block body %}
+  {% if validlink %}
+    <form method="post">
+      {% csrf_token %}
+      {% for el in form %}
+        <div class="container">
+            <div class="input-field">
+              {{el}}
+            </div>
+            <small class="orange accent-2">{{el.errors|striptags}}</small>
+        </div>
+      <script>
+        document.getElementById('{{el.auto_id}}').placeholder = "{{el.label}}";
+      </script>
+      {% endfor %}
+      <center>
+        <button type="submit" class="btn blue lighten-2">Submit</button>
+      </center>
+    </form>
+    <br>
+    <ul class="container">
+      <li>⬤ Your password can't be too similar to your other personal information.</li>
+      <li>⬤ Your password must contain at least 8 characters.</li>
+      <li>⬤ Your password can't be a commonly used password.</li>
+      <li>⬤ Your password can't be entirely numeric.</li>
+    </ul>
+  {% else %}
+    <p class="container py-4">
+      The password reset link was invalid, possibly because it has already been used.
+      Please request a new password reset.
+    </p>
+  {% endif %}
+{% endblock body %}

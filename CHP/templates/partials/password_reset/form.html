@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navTitle %}Forgot Password{% endblock navTitle %}
+{% block body %}
+<form method="post">
+  {% csrf_token %}
+  {% for el in form %}
+    <div class="container">
+        <div class="input-field">
+          {{el}}
+        </div>
+        <small class="orange accent-2">{{el.errors|striptags}}</small>
+    </div>
+  <script>
+    document.getElementById('id_email').placeholder = "{{el.label}}";
+  </script>
+  {% endfor %}
+  <center>
+    <button type="submit" class="btn blue lighten-2">Submit</button>
+  </center>
+</form>
+{% endblock body %}

@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext,gettext_lazy as _
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm
 from CHP.models import User
 
 class SignUp(UserCreationForm):
@@ -20,3 +20,11 @@ class Login(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'placeholder':'Email','class':'validate'}))
     password = forms.CharField(label=_("Password"),strip=False,
             widget=forms.PasswordInput(attrs={'placeholder':'Password','class':'validate'}))
+
+class ChangePassword(PasswordChangeForm):
+    old_password = forms.CharField(label=_("Password"),strip=False,
+            widget=forms.PasswordInput(attrs={'placeholder':'Old Password','class':'validate'}))
+    new_password1 = forms.CharField(label=_("Password"),strip=False,
+            widget=forms.PasswordInput(attrs={'placeholder':'New Password','class':'validate'}))
+    new_password2 = forms.CharField(label=_("Password"),strip=False,
+            widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password','class':'validate'}))

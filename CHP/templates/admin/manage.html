@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block navTitle %}Manage {{name}}{% endblock navTitle %}
+{% block body %}
+<div class="container">
+    <h5>Welcome, {{user.first_name}}</h5>
+</div>
+<hr class="h-0.5 bg-gray-200 mx-auto">
+{% if messages %}
+    {% for message in messages %}
+        <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
+    {% endfor %}
+{% endif %}
+<div class="mx-4 my-8 overflow-x-auto">
+    <table class="centered striped">
+        <thead class="bg-gray-200">
+            <tr>
+            {% if users %}
+                <th>User</th>
+                <th>Email</th>
+                <th>Role</th>
+            {% elif categories %}
+                <th>Name</th>
+                <th>Icon</th>
+            {% elif alldata %}
+                <th>Category</th>
+                <th>Data</th>
+            {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% if users %}
+            {% for user in users %}
+            {% if user.is_superuser is not True %}
+                <tr>
+                    <td>{{user.full_name}}</td>
+                    <td>{{user.email}}</td>
+                    {% for userGroup in user.groups.all %}
+                    <td>{{userGroup}}</td>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+            {% endfor %}
+        {% elif categories %}
+            {% for category in categories %}
+                <tr>
+                    <td>{{category.name}}</td>
+                    <td>{{category.icon}}</td>
+                </tr>
+            {% endfor %}
+        {% elif alldata %}
+            {% for data in alldata %}
+                <tr>
+                    <td>{{data.category}}</td>
+                    <td>{{data.data}}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock body %}
+{% block footer %}
+    <div class="my-2 float-right mr-4">
+        {% if categories %}
+        <a href="/add/categories" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
+        {% elif users %}
+        <a href="/add/users" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
+        {% elif alldata %}
+        <a href="/add/alldata" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
+        {% endif %}
+    </div>
+{% endblock footer %}

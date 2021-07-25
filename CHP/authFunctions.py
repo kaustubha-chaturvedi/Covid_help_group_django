@@ -23,14 +23,14 @@ account_activation_token = TokenGenerator()
 def user_signup(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = SignUp(request.POST)
+            form = SignUpForm(request.POST)
             if form.is_valid():
                 user = form.save()
                 group = Group.objects.get(name="Subscriber") 
                 user.groups.add(group)
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your ICHG account.'
-                message = render_to_string('partials/email_template.html', {
+                message = render_to_string('auth/email_template.html', {
                     'user': user,
                     'domain': current_site.domain,
                     'uid':urlsafe_base64_encode(force_bytes(user.pk))  ,
@@ -44,8 +44,8 @@ def user_signup(request):
                 messages.success(request, 'Form submission successful Activation Link Was sent to email')
                 return HttpResponseRedirect('/signin')
         else:
-            form = SignUp()
-        return render(request, 'signup.html', {'form':form})
+            form = SignUpForm()
+        return render(request, 'auth/signup.html', {'form':form})
     else:
         return HttpResponseRedirect('/dashboard')
 
@@ -68,7 +68,7 @@ def user_activation(request, uidb64, token):
 def user_login(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
-            form = Login(request=request,data=request.POST)
+            form = LoginForm(request=request,data=request.POST)
             if form.is_valid():
                 email = form.cleaned_data['username']
                 upass = form.cleaned_data['password']
@@ -77,8 +77,8 @@ def user_login(request):
                     login(request,user)
                     return HttpResponseRedirect('/dashboard')
         else:
-            form = Login()
-            return render(request, 'login.html',{'form':form})
+            form = LoginForm()
+            return render(request, 'auth/login.html',{'form':form})
     else:
         return HttpResponseRedirect('/dashboard')
 
@@ -88,7 +88,7 @@ def user_logout(request):
 
 def change_password(request):
     if request.method == 'POST':
-        form = ChangePassword(request.user, request.POST)
+        form = ChangePasswordForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -97,5 +97,5 @@ def change_password(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = ChangePassword(request.user)
-    return render(request, 'partials/changepass.html', {'form': form})
+        form = ChangePasswordForm(request.user)
+    return render(request, 'auth/changepass.html', {'form': form})

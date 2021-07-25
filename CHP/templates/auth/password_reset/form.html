@@ -12,7 +12,7 @@
         <small class="orange accent-2">{{el.errors|striptags}}</small>
     </div>
   <script>
-    document.getElementById('id_email').placeholder = "{{el.label}}";
+    document.getElementById('{{el.auto_id}}').placeholder = "{{el.label}}";
   </script>
   {% endfor %}
   <center>

@@ -32,10 +32,10 @@
             {% for user in users %}
             {% if user.is_superuser is not True %}
                 <tr>
-                    <td>{{user.full_name}}</td>
-                    <td>{{user.email}}</td>
+                    <td><a href="/edit/users/{{user.id}}">{{user.full_name}}</a></td>
+                    <td><a href="/edit/users/{{user.id}}">{{user.email}}</a></td>
                     {% for userGroup in user.groups.all %}
-                    <td>{{userGroup}}</td>
+                    <td><a href="/edit/users/{{user.id}}">{{userGroup}}</a></td>
                     {% endfor %}
                 </tr>
             {% endif %}
@@ -43,17 +43,21 @@
         {% elif categories %}
             {% for category in categories %}
                 <tr>
-                    <td>{{category.name}}</td>
-                    <td>{{category.icon}}</td>
+                    <td><a href="/edit/categories/{{category.id}}">{{category.name}}</a></td>
+                    <td><a href="/edit/categories/{{category.id}}">{{category.icon}}</a></td>
                 </tr>
             {% endfor %}
         {% elif alldata %}
             {% for data in alldata %}
                 <tr>
-                    <td>{{data.category}}</td>
-                    <td>{{data.data}}</td>
+                    <td><a href="/edit/alldata/{{data.id}}">{{data.category}}</a></td>
+                    <td><a href="/edit/alldata/{{data.id}}">{{data.data}}</a></td>
                 </tr>
             {% endfor %}
+        {% else %}
+            <div class="my-4 px-4 text-center">
+                <h5>No {{name}} to Display</h5>
+            </div>
         {% endif %}
         </tbody>
     </table>
@@ -61,11 +65,11 @@
 {% endblock body %}
 {% block footer %}
     <div class="my-2 float-right mr-4">
-        {% if categories %}
+        {% if name == 'Categories' %}
         <a href="/add/categories" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
-        {% elif users %}
+        {% elif name == 'Users' %}
         <a href="/add/users" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
-        {% elif alldata %}
+        {% elif name == 'Data' %}
         <a href="/add/alldata" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% endif %}
     </div>

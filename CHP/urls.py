@@ -20,7 +20,9 @@ adminFunctionsList=[
     path('manage-categories',manage_categories,name='manage-categories'),
     path('manage-data',manage_data,name='manage-data'),
     path('manage-users',manage_users,name='manage-users'),
-    path('add/<str:name>',add,name='add')
+    path('add/<str:name>',add,name='add'),
+    path('edit/<str:name>/<int:id>',edit,name='edit'),
+    path('jsontest',json_test),
 
 ]
 

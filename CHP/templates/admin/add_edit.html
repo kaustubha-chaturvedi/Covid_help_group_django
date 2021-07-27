@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block navTitle %}Add {{name}}{% endblock navTitle %}
+{% block navTitle %}{{name}}{% endblock navTitle %}
 {% block body %}
 <form method="post">
   {% csrf_token %}

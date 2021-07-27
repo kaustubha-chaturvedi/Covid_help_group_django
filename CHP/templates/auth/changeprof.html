@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block navTitle %}Change Profile Details{% endblock navTitle %}
+{% block body %}
+<form method="post">
+  {% csrf_token %}
+    <div class="container">
+        <div class="input-field">
+          {{form.first_name}}
+          {{form.last_name}}
+          <h6 class="font-semibold text-gray-600 mx-4 my-4">
+          {{email}}
+          </h6>
+          {{form.password.label}} :
+          {{form.password}}
+        </div>
+        <small class="orange accent-2">{{el.errors|striptags}}</small>
+    </div>
+  <center>
+    <button type="submit" class="btn blue lighten-2">Submit</button>
+  </center>
+</form>
+{% endblock body %}

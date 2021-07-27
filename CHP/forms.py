@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import gettext,gettext_lazy as _
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,UserChangeForm
 from CHP.models import *
 
 class SignUpForm(UserCreationForm):
@@ -26,6 +26,29 @@ class ChangePasswordForm(PasswordChangeForm):
     new_password2 = forms.CharField(label=_("Password"),strip=False,
             widget=forms.PasswordInput(attrs={'placeholder':'Confirm Password','class':'validate'}))
             
+class ChangeUserProfileForm(UserChangeForm):
+    password = forms.PasswordInput()
+    class Meta:
+        model = User
+        fields = {'first_name','last_name','password'}
+        labels = {'first_name':'First Name','last_name':'Last Name'}
+        widgets = {
+            'first_name':forms.TextInput(attrs={'placeholder':'First Name','class':'validate'}),
+            'last_name':forms.TextInput(attrs={'placeholder':'Last Name','class':'validate'}),
+        }
+
+class AdminUserChangeForm(UserChangeForm):
+    password = forms.PasswordInput(attrs={'type':'hidden'})
+    class Meta:
+        model = User
+        fields = {'is_superuser','is_active','is_staff'}
+        labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member'}
+        widget = {
+            'is_superuser':forms.BooleanField(),
+            'is_actie':forms.BooleanField(),
+            'is_staff':forms.BooleanField(),
+            'password':forms.PasswordInput(attrs={'type':'hidden'}),
+            }
 class AddCategoryForm(forms.ModelForm):
     class Meta:
         model = Categories

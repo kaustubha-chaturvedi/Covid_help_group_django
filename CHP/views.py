@@ -93,7 +93,7 @@ def edit(request,name,id):
                     return HttpResponseRedirect('/manage-categories')
             elif name == 'users':
                 data = User.objects.get(pk=id)
-                form = SignUpForm(request.POST,instance=data)
+                form = AdminUserChangeForm(request.POST,instance=data)
                 if form.is_valid():
                     form.save()
                     messages.success(request,'Successfully Changed User')
@@ -113,14 +113,14 @@ def edit(request,name,id):
             elif name == 'users':
                 sname="User"
                 data = User.objects.get(pk=id)
-                form = SignUpForm(instance=data)
+                form = AdminUserChangeForm(instance=data)
             elif name == 'alldata':
                 sname="Data"
                 data=AllData.objects.get(pk=id)
                 form = SignUpForm(instance=data)
             else:
                 return HttpResponseRedirect('/dashboard')
-            return render(request,'admin/add_edit.html',{'name':f'Edit {sname}','form':form})
+            return render(request,'admin/add_edit.html',{'name':f'Edit {sname}','form':form,'everything':data})
     else:
         return HttpResponseRedirect('/signin')
 

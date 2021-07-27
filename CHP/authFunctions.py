@@ -93,9 +93,24 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return HttpResponseRedirect('/change_password')
+            return HttpResponseRedirect('/changepass')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
         form = ChangePasswordForm(request.user)
     return render(request, 'auth/changepass.html', {'form': form})
+
+def change_profile(request):
+    if request.method == 'POST':
+        form = ChangeUserProfileForm(request.POST,instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your Profile was successfully updated!')
+            return HttpResponseRedirect('/changeprof')
+        else:
+            messages.error(request, 'Please correct the error below.')
+            return HttpResponseRedirect('/changeprof')
+    else:
+        form = ChangeUserProfileForm(instance=request.user)
+    return render(request, 'auth/changeprof.html', {'form': form,'email':request.user.email})

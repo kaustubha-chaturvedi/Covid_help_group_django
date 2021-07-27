@@ -2,6 +2,7 @@
 {% load static %}
 {% block navTitle %}{{name}}{% endblock navTitle %}
 {% block body %}
+{% if name != 'Edit User' %}
 <form method="post">
   {% csrf_token %}
   {% for el in form %}
@@ -16,4 +17,33 @@
     <button type="submit" class="btn blue lighten-2">Submit</button>
   </center>
 </form>
+{% else %}
+<form method="post">
+{% csrf_token %}
+<center class="my-8">
+  <h6 class="text-gray-600">{{everything.full_name}}</h6>
+  <h6 class="text-gray-600">{{everything.email}}</h6>
+  <br>
+  <div class="container">
+    <label>
+      {{form.is_superuser}}  
+      <span>{{form.is_superuser.label}}</span>  
+    </label>
+  </div>
+  <div class="container">
+    <label>
+      {{form.is_active}}  
+      <span>{{form.is_active.label}}</span>  
+    </label>
+  </div>
+  <div class="container">
+    <label>
+      {{form.is_staff}}  
+      <span>{{form.is_staff.label}}</span>  
+    </label>
+  </div>
+  <button type="submit"  class="btn blue lighten-2 my-4">Submit</button>
+</center>
+</form>
+{% endif %}
 {% endblock body %}

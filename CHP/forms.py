@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext,gettext_lazy as _
+from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,UserChangeForm
 from CHP.models import *
 
@@ -39,16 +40,11 @@ class ChangeUserProfileForm(UserChangeForm):
 
 class AdminUserChangeForm(UserChangeForm):
     password = forms.PasswordInput(attrs={'type':'hidden'})
+    usergroup =  forms.ModelChoiceField(Group.objects.all(), empty_label=None)
     class Meta:
         model = User
-        fields = {'is_superuser','is_active','is_staff'}
-        labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member'}
-        widget = {
-            'is_superuser':forms.BooleanField(),
-            'is_actie':forms.BooleanField(),
-            'is_staff':forms.BooleanField(),
-            'password':forms.PasswordInput(attrs={'type':'hidden'}),
-            }
+        fields = {'is_superuser','is_active','is_staff','usergroup'}
+        labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member','usergroup':'User Permission Level'}
 class AddCategoryForm(forms.ModelForm):
     class Meta:
         model = Categories

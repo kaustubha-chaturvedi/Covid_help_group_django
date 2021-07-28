@@ -24,7 +24,7 @@ def dashboard(request):
         return HttpResponseRedirect('/signin')
 
 def manage_users(request):
-    if request.user.has_perm('CHP.view_users'):
+    if request.user.has_perm('CHP.view_user'):
         allusers = User.objects.all()
         return render(request,'admin/manage.html',{'name':'Users','users':allusers})
     else:
@@ -53,7 +53,7 @@ def add(request,name):
                     form.save()
                     messages.success(request,'Successfully added Category')
                     return HttpResponseRedirect('/manage-categories')
-            elif name == 'users':
+            elif name == 'user':
                 form = SignUpForm(request.POST)
                 if form.is_valid():
                     form.save()
@@ -69,7 +69,7 @@ def add(request,name):
             if name == 'categories':
                 sname="Category"
                 form = AddCategoryForm()
-            elif name == 'users':
+            elif name == 'user':
                 sname="User"
                 form = SignUpForm()
             elif name == 'alldata':
@@ -91,10 +91,12 @@ def edit(request,name,id):
                     form.save()
                     messages.success(request,'Successfully Changed Category')
                     return HttpResponseRedirect('/manage-categories')
-            elif name == 'users':
+            elif name == 'user':
                 data = User.objects.get(pk=id)
                 form = AdminUserChangeForm(request.POST,instance=data)
                 if form.is_valid():
+                    data.groups.clear()
+                    data.groups.add(form.cleaned_data['usergroup'])
                     form.save()
                     messages.success(request,'Successfully Changed User')
                     return HttpResponseRedirect('/manage-users')
@@ -110,7 +112,7 @@ def edit(request,name,id):
                 sname="Category"
                 data = Categories.objects.get(pk=id)
                 form = AddCategoryForm(instance=data)
-            elif name == 'users':
+            elif name == 'user':
                 sname="User"
                 data = User.objects.get(pk=id)
                 form = AdminUserChangeForm(instance=data)

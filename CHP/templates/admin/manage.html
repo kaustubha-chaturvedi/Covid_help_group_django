@@ -2,7 +2,7 @@
 {% block navTitle %}Manage {{name}}{% endblock navTitle %}
 {% block body %}
 <div class="container">
-    <h5>Welcome, {{user.first_name}}</h5>
+    <h5>Welcome, {{request.user.first_name}}</h5>
 </div>
 <hr class="h-0.5 bg-gray-200 mx-auto">
 {% if messages %}
@@ -30,12 +30,12 @@
         <tbody>
         {% if users %}
             {% for user in users %}
-            {% if user.is_superuser is not True %}
+            {% if user != request.user %}
                 <tr>
-                    <td><a href="/edit/users/{{user.id}}">{{user.full_name}}</a></td>
-                    <td><a href="/edit/users/{{user.id}}">{{user.email}}</a></td>
+                    <td><a href="/edit/user/{{user.id}}">{{user.full_name}}</a></td>
+                    <td><a href="/edit/user/{{user.id}}">{{user.email}}</a></td>
                     {% for userGroup in user.groups.all %}
-                    <td><a href="/edit/users/{{user.id}}">{{userGroup}}</a></td>
+                    <td><a href="/edit/user/{{user.id}}">{{userGroup}}</a></td>
                     {% endfor %}
                 </tr>
             {% endif %}
@@ -68,7 +68,7 @@
         {% if name == 'Categories' %}
         <a href="/add/categories" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% elif name == 'Users' %}
-        <a href="/add/users" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
+        <a href="/add/user" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% elif name == 'Data' %}
         <a href="/add/alldata" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% endif %}

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin,Group
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -49,6 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('active'),default=False)
     is_superuser = models.BooleanField(_('superuser'),default=False)
     date_joined = models.DateTimeField(_('date joined'),default=timezone.now)
+    usergroup = models.ForeignKey(Group,related_name="groups",on_delete=models.SET_NULL,null=True)
   
     USERNAME_FIELD = 'email'
     objects = UserManager()

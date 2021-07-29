@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 {% block navTitle %}Manage {{name}}{% endblock navTitle %}
 {% block body %}
-<div class="container">
-    <h5>Welcome, {{request.user.first_name}}</h5>
-</div>
-<hr class="h-0.5 bg-gray-200 mx-auto">
 {% if messages %}
     {% for message in messages %}
         <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
@@ -22,8 +18,9 @@
                 <th>Name</th>
                 <th>Icon</th>
             {% elif alldata %}
-                <th>Category</th>
-                <th>Data</th>
+                <th>{{category.field1}}</th>
+                <th>Verified</th>
+                <th>Visible</th>
             {% endif %}
             </tr>
         </thead>
@@ -50,8 +47,9 @@
         {% elif alldata %}
             {% for data in alldata %}
                 <tr>
-                    <td><a href="/edit/alldata/{{data.id}}">{{data.category}}</a></td>
-                    <td><a href="/edit/alldata/{{data.id}}">{{data.data}}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.field1}}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.isVerified}}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.isShown}}</a></td>
                 </tr>
             {% endfor %}
         {% else %}
@@ -69,8 +67,8 @@
         <a href="/add/categories" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% elif name == 'Users' %}
         <a href="/add/user" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
-        {% elif name == 'Data' %}
-        <a href="/add/alldata" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
+        {% elif 'Data' in name %}
+        <a href="/addData/{{category}}" class="btn-floating btn-large waves-effect waves-light red"><i class="ti-2x ti ti-plus"></i></a>
         {% endif %}
     </div>
 {% endblock footer %}

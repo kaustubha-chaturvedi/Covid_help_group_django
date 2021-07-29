@@ -21,10 +21,12 @@ adminFunctionsList=[
     path('manage-categories',manage_categories,name='manage-categories'),
     path('manage-data',manage_data,name='manage-data'),
     path('manage-users',manage_users,name='manage-users'),
+    path('manage/<str:category>',manage_data_cat,),
     path('add/<str:name>',add,name='add'),
+    path('addData/<str:category>',add_data,name='addData'),
     path('edit/<str:name>/<int:id>',edit,name='edit'),
-    path('jsontest',json_test),
-
+    path('editData/<str:category>/<int:id>',edit_data,name='editData'),
+    path('deleteData/<str:category>/<int:id>',delete_data,name='deleteData'),
 ]
 
 genericUrls = [

@@ -4,6 +4,7 @@ from django.contrib.auth import *
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
 
 def searchIcon(request):
     return render(request,'tabler-icons.html')
@@ -39,10 +40,16 @@ def manage_categories(request):
 
 def manage_data(request):
     if request.user.has_perm('CHP.view_alldata'):
-        allData = AllData.objects.all()
-        return render(request,'admin/manage.html',{'name':'Data','alldata':allData})
+        return render(request,'admin/manage_data.html',{'alldata':AllData.objects.all(),'categories':Categories.objects.all()})
     else:
         return HttpResponseRedirect('/signin')
+
+def manage_data_cat(request,category):
+    alldata = AllData.objects.filter(category=Categories.objects.get(name=category).id)
+    return render(request,'admin/manage.html',{
+            'name':f"{category} Data",'alldata':alldata,
+            'category':Categories.objects.get(name=category)
+        })
 
 def add(request,name):
     if request.user.has_perm('CHP.add_'+name):
@@ -59,12 +66,6 @@ def add(request,name):
                     form.save()
                     messages.success(request,'Successfully added User')
                     return HttpResponseRedirect('/manage-users')
-            elif name == 'alldata':
-                form = SignUpForm(request.POST)
-                if form.is_valid():
-                    form.save()
-                    messages.success(request,'Successfully added User')
-                    return HttpResponseRedirect('/manage-data')
         else:
             if name == 'categories':
                 sname="Category"
@@ -72,14 +73,36 @@ def add(request,name):
             elif name == 'user':
                 sname="User"
                 form = SignUpForm()
-            elif name == 'alldata':
-                sname="Data"
-                form = SignUpForm()
             else:
                 return HttpResponseRedirect('/dashboard')
             return render(request,'admin/add_edit.html',{'name':f'Add {sname}','form':form})
     else:
         return HttpResponseRedirect('/signin')
+
+
+def add_data(request,category):
+    if request.user.has_perm('CHP.add_alldata'):
+        if request.method == 'POST':
+            form = AddDataForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Successfully added Data')
+                return HttpResponseRedirect(f'/manage/{category}')
+        else:
+            dataField = {}
+            for k,v in model_to_dict(Categories.objects.get(name=category)).items():
+                if k not in ['','id','name','icon'] and v!='':
+                    dataField[k]=v
+            form = AddDataForm()
+            return render(request,'admin/add_edit.html',{
+                                        'name':f'Edit Data','form':form,
+                                        'dataField':dataField,'categoryId':Categories.objects.get(name=category).id,
+                                        'categoryName':category
+                                    }
+                        )
+    else:
+        return HttpResponseRedirect('/signin')
+
 
 def edit(request,name,id):
     if request.user.has_perm('CHP.change_'+name):
@@ -100,13 +123,6 @@ def edit(request,name,id):
                     form.save()
                     messages.success(request,'Successfully Changed User')
                     return HttpResponseRedirect('/manage-users')
-            elif name == 'alldata':
-                data = User.objects.get(pk=id)
-                form = SignUpForm(request.POST,instance=data)
-                if form.is_valid():
-                    form.save()
-                    messages.success(request,'Successfully Changed Data')
-                    return HttpResponseRedirect('/manage-data')
         else:
             if name == 'categories':
                 sname="Category"
@@ -116,16 +132,47 @@ def edit(request,name,id):
                 sname="User"
                 data = User.objects.get(pk=id)
                 form = AdminUserChangeForm(instance=data)
-            elif name == 'alldata':
-                sname="Data"
-                data=AllData.objects.get(pk=id)
-                form = SignUpForm(instance=data)
             else:
                 return HttpResponseRedirect('/dashboard')
             return render(request,'admin/add_edit.html',{'name':f'Edit {sname}','form':form,'everything':data})
     else:
         return HttpResponseRedirect('/signin')
 
-def json_test(request):
-    data=list(Categories.objects.values())
-    return JsonResponse(data,safe=False)
+
+def edit_data(request,category,id):
+    if request.user.has_perm('CHP.add_alldata'):
+        if request.method == 'POST':
+            data = AllData.objects.get(pk=id)
+            form = AddDataForm(request.POST,instance=data)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Successfully Changed Data')
+                return HttpResponseRedirect(f'/manage/{category}')
+        else:
+            dataField = {}
+            for k,v in model_to_dict(Categories.objects.get(name=category)).items():
+                if k not in ['','id','name','icon'] and v!='':
+                    dataField[k]=v
+            data = AllData.objects.get(pk=id)
+            form = AddDataForm(instance=data)
+            return render(request,'admin/add_edit.html',{
+                                        'name':f'Edit Data','form':form,
+                                        'dataField':dataField,'categoryId':Categories.objects.get(name=category).id,
+                                        'categoryName':category,'id':id
+                                    }
+                        )
+    else:
+        return HttpResponseRedirect('/signin')
+
+def delete_data(request,category,id):
+    if request.user.has_perm('CHP.delete_alldata'):
+        if request.method == 'POST':
+            pi = AllData.objects.get(pk=id)
+            pi.delete()
+            messages.success(request,'Successfully Deleted Data')
+            return HttpResponseRedirect(f'/manage/{category}')
+        else:
+            messages.success(request,'Data Deletion Unsuccessfull')
+            return HttpResponseRedirect(f'/manage/{category}')
+    else:
+        return HttpResponseRedirect('/signin')

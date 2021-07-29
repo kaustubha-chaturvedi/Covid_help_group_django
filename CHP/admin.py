@@ -62,4 +62,4 @@ class CategoriesModelAdmin(admin.ModelAdmin):
 
 @admin.register(AllData)
 class AllDataAdmin(admin.ModelAdmin):
-    list_display=['category','data']
+    list_display=['category','id','field1','isVerified','isShown']

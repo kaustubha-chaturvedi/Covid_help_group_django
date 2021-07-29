@@ -40,11 +40,11 @@ class ChangeUserProfileForm(UserChangeForm):
 
 class AdminUserChangeForm(UserChangeForm):
     password = forms.PasswordInput(attrs={'type':'hidden'})
-    usergroup =  forms.ModelChoiceField(Group.objects.all(), empty_label=None)
+    usergroup =  forms.ModelChoiceField(Group.objects.all(),label="User Permission Level", empty_label=None)
     class Meta:
         model = User
         fields = {'is_superuser','is_active','is_staff','usergroup'}
-        labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member','usergroup':'User Permission Level'}
+        labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member'}
 class AddCategoryForm(forms.ModelForm):
     class Meta:
         model = Categories
@@ -64,3 +64,14 @@ class AddCategoryForm(forms.ModelForm):
             'field23':'Field 23 Name','field24':'Field 24 Name',
         }
         widgets = {k:forms.TextInput(attrs={'placeholder':v,'class':'validate'}) for k,v in labels.items()}
+
+class AddDataForm(forms.ModelForm):
+    category =  forms.ModelChoiceField(Categories.objects.all(), empty_label=None)
+    class Meta:
+        model = AllData
+        fields = [
+            'category','field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7','field8',
+            'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15','field16','field17',
+            'field18', 'field19', 'field20', 'field21','field22', 'field23', 'field24','isShown','isVerified'
+        ]
+        

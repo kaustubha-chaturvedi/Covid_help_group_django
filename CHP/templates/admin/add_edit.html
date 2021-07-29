@@ -2,25 +2,15 @@
 {% load static %}
 {% block navTitle %}{{name}}{% endblock navTitle %}
 {% block body %}
-{% if name != 'Edit User' %}
-<form method="post">
-    {% csrf_token %}
-    {% for el in form %}
-        <div class="container">
-            <div class="input-field">
-            {{el}}
-            </div>
-            <small class="orange accent-2">{{el.errors|striptags}}</small>
-        </div>
+{% if messages %}
+    {% for message in messages %}
+        <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
     {% endfor %}
-    <center>
-        <button type="submit" class="btn blue lighten-2">Submit</button>
-    </center>
-</form>
-{% else %}
+{% endif %}
+{% if name == 'Edit User' %}
 <form method="post">
     {% csrf_token %}
-    <center class="my-8">
+    <center id="formContent" class="my-8">
         <h6 class="text-gray-600">{{everything.full_name}}</h6>
         <h6 class="text-gray-600">{{everything.email}}</h6>
         <br>
@@ -46,8 +36,86 @@
             {{form.usergroup}}
             <label>{{form.usergroup.label}}</label>
         </div>
-        <button type="submit"  class="btn blue lighten-2 my-4">Submit</button>
     </center>
+    <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
+        <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
+        <div>
+        <a href="/manage/{{categoryName}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></a>
+        <a href="/manage-users" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
+        </div>
+    </div>
+    <script>
+        footHeight = document.querySelector('#formFoot').clientHeight+2;
+        document.querySelector('#formContent').setAttribute('style','margin-bottom:'+footHeight+'px!important;');
+    </script>
+</form>
+{% elif 'Data' in name %}
+<form method="post">
+    {% csrf_token %}
+    <input name="category" id="id_category" value="{{categoryId}}" type="hidden">
+    <div id="formContent">
+    {% for el in form %}
+        {% if el.html_name in dataField %}
+        <div class="container">
+            <div class="input-field">
+            {{el}}
+            </div>
+            <small class="orange accent-2">{{el.errors|striptags}}</small>
+        </div>
+        <script>
+            document.getElementById('{{el.auto_id}}').placeholder = "{% for key,value in dataField.items %}{% if el.html_name == key %}{{value}}{% endif %}{% endfor %}"
+        </script>
+        {% endif %}
+    {% endfor %}
+        <div class="container">
+            <label>
+            {{form.isVerified}}  
+            <span>{{form.isVerified.label}}</span>  
+            </label>
+        </div>
+        <div class="container">
+            <label>
+            {{form.isShown}}  
+            <span>{{form.isShown.label}}</span>  
+            </label>
+        </div>
+    </div>
+    <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
+        <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
+        <div>
+        <button type="submit" formaction="/deleteData/{{categoryName}}/{{id}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></button>
+        <a href="/manage/{{categoryName}}" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
+        </div>
+    </div>
+    <script>
+        footHeight = document.querySelector('#formFoot').clientHeight+2;
+        document.querySelector('#formContent').setAttribute('style','margin-bottom:'+footHeight+'px!important;');
+    </script>
+</form>
+{% else %}
+<form method="post">
+    {% csrf_token %}
+    <div id="formContent">
+    {% for el in form %}
+        <div class="container">
+            <div class="input-field">
+            {{el}}
+            </div>
+            <small class="orange accent-2">{{el.errors|striptags}}</small>
+        </div>
+    {% endfor %}
+    </div>
+    <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
+        <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
+        <div>
+        <a href="/manage/{{categoryName}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></a>
+        <a href="/manage-categories" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
+        </div>
+    </div>
+    <script>
+        footHeight = document.querySelector('#formFoot').clientHeight+2;
+        document.querySelector('#formContent').setAttribute('style','margin-bottom:'+footHeight+'px!important;');
+    </script>
 </form>
 {% endif %}
 <script>

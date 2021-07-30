@@ -88,7 +88,7 @@ class Categories(models.Model):
     field22 = models.TextField(null=True,blank=True)
     field23 = models.TextField(null=True,blank=True)
     field24 = models.TextField(null=True,blank=True)
-    
+    is_shown = models.BooleanField(default=True)
     class Meta: 
         verbose_name = "Category"
         verbose_name_plural = "Categories"
@@ -97,7 +97,7 @@ class Categories(models.Model):
         return self.name
 
 class AllData(models.Model):
-    category = models.ForeignKey(Categories,related_name="category",on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Categories,related_name="category",on_delete=models.SET_NULL,null=True)
     field1 = models.TextField(null=True,blank=True)
     field2 = models.TextField(null=True,blank=True)
     field3 = models.TextField(null=True,blank=True)
@@ -122,5 +122,5 @@ class AllData(models.Model):
     field22 = models.TextField(null=True,blank=True)
     field23 = models.TextField(null=True,blank=True)
     field24 = models.TextField(null=True,blank=True)
-    isVerified = models.BooleanField(default=False)
-    isShown = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    is_shown = models.BooleanField(default=False)

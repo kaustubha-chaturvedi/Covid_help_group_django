@@ -95,7 +95,7 @@ def add_data(request,category):
                     dataField[k]=v
             form = AddDataForm()
             return render(request,'admin/add_edit.html',{
-                                        'name':f'Edit Data','form':form,
+                                        'name':f'Add Data','form':form,
                                         'dataField':dataField,'categoryId':Categories.objects.get(name=category).id,
                                         'categoryName':category
                                     }
@@ -134,7 +134,7 @@ def edit(request,name,id):
                 form = AdminUserChangeForm(instance=data)
             else:
                 return HttpResponseRedirect('/dashboard')
-            return render(request,'admin/add_edit.html',{'name':f'Edit {sname}','form':form,'everything':data})
+            return render(request,'admin/add_edit.html',{'name':f'Edit {sname}','form':form,'everyDetail':data})
     else:
         return HttpResponseRedirect('/signin')
 
@@ -167,12 +167,37 @@ def edit_data(request,category,id):
 def delete_data(request,category,id):
     if request.user.has_perm('CHP.delete_alldata'):
         if request.method == 'POST':
-            pi = AllData.objects.get(pk=id)
-            pi.delete()
+            data = AllData.objects.get(pk=id)
+            data.delete()
             messages.success(request,'Successfully Deleted Data')
             return HttpResponseRedirect(f'/manage/{category}')
         else:
             messages.success(request,'Data Deletion Unsuccessfull')
             return HttpResponseRedirect(f'/manage/{category}')
+    else:
+        return HttpResponseRedirect('/signin')
+
+def delete(request,name,id):
+    if request.user.has_perm('CHP.delete_'+name):
+        if request.method == 'POST':
+            if name == 'categories':
+                category = Categories.objects.get(pk=id)
+                category.delete()
+                messages.success(request,'Successfully Deleted Category')
+                return HttpResponseRedirect('/manage-categories')
+            elif name == 'user':
+                user = User.objects.get(pk=id)
+                user.delete()
+                messages.success(request,'Successfully Deleted User')
+                return HttpResponseRedirect('/manage-users')
+        else:
+            if name == 'categories':
+                messages.success(request,'Category Deletion Unsuccessful')
+                return HttpResponseRedirect('/manage-categories')
+            elif name == 'user':
+                messages.success(request,'User Deletion Unsuccessful')
+                return HttpResponseRedirect('/manage-users')
+            else:
+                return HttpResponseRedirect('/dashboard')
     else:
         return HttpResponseRedirect('/signin')

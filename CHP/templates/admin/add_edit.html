@@ -11,8 +11,8 @@
 <form method="post">
     {% csrf_token %}
     <center id="formContent" class="my-8">
-        <h6 class="text-gray-600">{{everything.full_name}}</h6>
-        <h6 class="text-gray-600">{{everything.email}}</h6>
+        <h6 class="text-gray-600">{{everyDetail.full_name}}</h6>
+        <h6 class="text-gray-600">{{everyDetail.email}}</h6>
         <br>
         <div class="container">
             <label>
@@ -40,7 +40,9 @@
     <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
         <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
         <div>
-        <a href="/manage/{{categoryName}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></a>
+        {% if "Edit" in name %}
+        <button type="submit" formaction="/delete/user/{{everyDetail.id}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></button>
+        {% endif %}
         <a href="/manage-users" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
         </div>
     </div>
@@ -69,21 +71,23 @@
     {% endfor %}
         <div class="container">
             <label>
-            {{form.isVerified}}  
-            <span>{{form.isVerified.label}}</span>  
+            {{form.is_verified}}  
+            <span>{{form.is_verified.label}}</span>  
             </label>
         </div>
         <div class="container">
             <label>
-            {{form.isShown}}  
-            <span>{{form.isShown.label}}</span>  
+            {{form.is_shown}}  
+            <span>{{form.is_shown.label}}</span>  
             </label>
         </div>
     </div>
     <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
         <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
         <div>
+        {% if "Edit" in name %}
         <button type="submit" formaction="/deleteData/{{categoryName}}/{{id}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></button>
+        {% endif %}
         <a href="/manage/{{categoryName}}" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
         </div>
     </div>
@@ -108,7 +112,9 @@
     <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">
         <button type="submit" class="btn-floating my-4 mx-2 blue lighten-2"><i class="ti ti-2x ti-checks"></i></button>
         <div>
-        <a href="/manage/{{categoryName}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></a>
+        {% if 'Edit' in name %}
+        <button type="submit" formaction="/delete/categories/{{everyDetail.id}}" class="btn-floating shadow-0 my-4 mx-2 red lighten-2"><i class="ti ti-2x ti-clipboard-x"></i></button>
+        {% endif %}
         <a href="/manage-categories" class="btn-floating my-4 mx-2 blue-grey lighten-2"><i class="ti ti-2x ti-x"></i></a>
         </div>
     </div>

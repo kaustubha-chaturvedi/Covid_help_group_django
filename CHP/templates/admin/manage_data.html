@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block navTitle %}Manage Data{% endblock navTitle %}
 {% block body %}
+    {% if categories %}
 <div class="grid gap-4 grid-cols-3 mx-4 my-2">
-    {% for category in categories %}
-    <a href="/manage/{{category.name}}" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
-        <i class="ti ti-3x {{category.icon}}"></i>
-        {{category.name}}
-    </a>
-    {% endfor %}
+        {% for category in categories %}
+        <a href="/manage/{{category.name}}" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
+            <i class="ti ti-3x {{category.icon}}"></i>
+            {{category.name}}
+        </a>
+        {% endfor %}
 </div>
+    {% else %}
+        <div class="my-4 px-4 text-center">
+            <h5>No categories to Display</h5>
+        </div>
+    {% endif %}
 {% endblock body %}

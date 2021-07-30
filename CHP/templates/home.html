@@ -10,10 +10,12 @@
 </script>
 <div class="grid gap-4 grid-cols-3 mx-4 my-2">
     {% for category in categories %}
+    {% if category.is_shown %}
     <a href="/breifpage/{{category.name}}" class="border-2 flex flex-col items-center text-center text-black font-semibold justify-center border-green-400 shadow-lg rounded-lg p-2">
         <i class="ti ti-3x {{category.icon}}"></i>
         {{category.name}}
     </a>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock body %}

@@ -26,6 +26,7 @@ adminFunctionsList=[
     path('addData/<str:category>',add_data,name='addData'),
     path('edit/<str:name>/<int:id>',edit,name='edit'),
     path('editData/<str:category>/<int:id>',edit_data,name='editData'),
+    path('delete/<str:name>/<int:id>',delete,name='delete'),
     path('deleteData/<str:category>/<int:id>',delete_data,name='deleteData'),
 ]
 

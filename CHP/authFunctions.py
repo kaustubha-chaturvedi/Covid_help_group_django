@@ -76,6 +76,8 @@ def user_login(request):
                 if user is not None:
                     login(request,user)
                     return HttpResponseRedirect('/dashboard')
+                else:
+                    return HttpResponseRedirect('/')    
         else:
             form = LoginForm()
             return render(request, 'auth/login.html',{'form':form})

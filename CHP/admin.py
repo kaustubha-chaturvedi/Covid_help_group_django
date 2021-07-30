@@ -58,8 +58,8 @@ admin.site.register(User, CustomUserAdmin)
 
 @admin.register(Categories)
 class CategoriesModelAdmin(admin.ModelAdmin):
-    list_display=['name','id']
+    list_display=['name','id','is_shown']
 
 @admin.register(AllData)
 class AllDataAdmin(admin.ModelAdmin):
-    list_display=['category','id','field1','isVerified','isShown']
+    list_display=['category','id','field1','is_verified','is_shown']

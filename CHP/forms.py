@@ -52,18 +52,38 @@ class AddCategoryForm(forms.ModelForm):
             'name', 'icon', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7',
             'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15',
             'field16', 'field17', 'field18', 'field19', 'field20', 'field21',
-            'field22', 'field23', 'field24'
+            'field22', 'field23', 'field24','is_shown'
         ]
-        labels = {
-            'name':'Name','icon':'Icon','field1':'Field 1 Name','field2':'Field 2 Name',
-            'field3':'Field 3 Name','field4':'Field 4 Name','field5':'Field 5 Name','field6':'Field 6 Name',
-            'field7':'Field 7 Name','field8':'Field 8 Name','field9':'Field 9 Name','field10':'Field 10 Name',
-            'field11':'Field 11 Name','field12':'Field 12 Name','field13':'Field 13 Name','field14':'Field 14 Name',
-            'field15':'Field 15 Name','field16':'Field 16 Name','field17':'Field 17 Name','field18':'Field 18 Name',
-            'field19':'Field 19 Name','field20':'Field 20 Name','field21':'Field 21 Name','field22':'Field 22 Name',
-            'field23':'Field 23 Name','field24':'Field 24 Name',
+        widgets = {
+            'name':forms.TextInput(attrs={'placeholder':'Name','class':'validate'}),
+            'icon':forms.TextInput(attrs={'placeholder':'Icon','class':'validate'}),
+            'field1':forms.TextInput(attrs={'placeholder':'Field 1 Name','class':'validate'}),
+            'field2':forms.TextInput(attrs={'placeholder':'Field 2 Name','class':'validate'}),
+            'field3':forms.TextInput(attrs={'placeholder':'Field 3 Name','class':'validate'}),
+            'field4':forms.TextInput(attrs={'placeholder':'Field 4 Name','class':'validate'}),
+            'field5':forms.TextInput(attrs={'placeholder':'Field 5 Name','class':'validate'}),
+            'field6':forms.TextInput(attrs={'placeholder':'Field 6 Name','class':'validate'}),
+            'field7':forms.TextInput(attrs={'placeholder':'Field 7 Name','class':'validate'}),
+            'field8':forms.TextInput(attrs={'placeholder':'Field 8 Name','class':'validate'}),
+            'field9':forms.TextInput(attrs={'placeholder':'Field 9 Name','class':'validate'}),
+            'field10':forms.TextInput(attrs={'placeholder':'Field 10 Name','class':'validate'}),
+            'field11':forms.TextInput(attrs={'placeholder':'Field 11 Name','class':'validate'}),
+            'field12':forms.TextInput(attrs={'placeholder':'Field 12 Name','class':'validate'}),
+            'field13':forms.TextInput(attrs={'placeholder':'Field 12 Name','class':'validate'}),
+            'field14':forms.TextInput(attrs={'placeholder':'Field 14 Name','class':'validate'}),
+            'field15':forms.TextInput(attrs={'placeholder':'Field 16 Name','class':'validate'}),
+            'field16':forms.TextInput(attrs={'placeholder':'Field 16 Name','class':'validate'}),
+            'field17':forms.TextInput(attrs={'placeholder':'Field 17 Name','class':'validate'}),
+            'field18':forms.TextInput(attrs={'placeholder':'Field 18 Name','class':'validate'}),
+            'field19':forms.TextInput(attrs={'placeholder':'Field 19 Name','class':'validate'}),
+            'field20':forms.TextInput(attrs={'placeholder':'Field 20 Name','class':'validate'}),
+            'field21':forms.TextInput(attrs={'placeholder':'Field 21 Name','class':'validate'}),
+            'field22':forms.TextInput(attrs={'placeholder':'Field 22 Name','class':'validate'}),
+            'field23':forms.TextInput(attrs={'placeholder':'Field 23 Name','class':'validate'}),
+            'field24':forms.TextInput(attrs={'placeholder':'Field 24 Name','class':'validate'}),
+            'is_shown':forms.Select(choices=((True,'Visible'),(False,'Hidden'))),
         }
-        widgets = {k:forms.TextInput(attrs={'placeholder':v,'class':'validate'}) for k,v in labels.items()}
+
 
 class AddDataForm(forms.ModelForm):
     category =  forms.ModelChoiceField(Categories.objects.all(), empty_label=None)
@@ -72,6 +92,6 @@ class AddDataForm(forms.ModelForm):
         fields = [
             'category','field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7','field8',
             'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15','field16','field17',
-            'field18', 'field19', 'field20', 'field21','field22', 'field23', 'field24','isShown','isVerified'
+            'field18', 'field19', 'field20', 'field21','field22', 'field23', 'field24','is_shown','is_verified'
         ]
         

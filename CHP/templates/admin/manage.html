@@ -17,6 +17,7 @@
             {% elif categories %}
                 <th>Name</th>
                 <th>Icon</th>
+                <th>Visible</th>
             {% elif alldata %}
                 <th>{{category.field1}}</th>
                 <th>Verified</th>
@@ -42,14 +43,15 @@
                 <tr>
                     <td><a href="/edit/categories/{{category.id}}">{{category.name}}</a></td>
                     <td><a href="/edit/categories/{{category.id}}">{{category.icon}}</a></td>
+                    <td><a href="/edit/categories/{{category.id}}">{% if category.is_shown %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
                 </tr>
             {% endfor %}
         {% elif alldata %}
             {% for data in alldata %}
                 <tr>
                     <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.field1}}</a></td>
-                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.isVerified}}</a></td>
-                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.isShown}}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{% if data.is_verified %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{% if data.is_shown %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
                 </tr>
             {% endfor %}
         {% else %}

@@ -94,4 +94,7 @@ class AddDataForm(forms.ModelForm):
             'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15','field16','field17',
             'field18', 'field19', 'field20', 'field21','field22', 'field23', 'field24','is_shown','is_verified'
         ]
-        
+        widgets={
+            'is_verified':forms.Select(choices=((True,'Verified'),(False,'Unverified'))),
+            'is_shown':forms.Select(choices=((True,'Visible'),(False,'Hidden'))),
+        }

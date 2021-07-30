@@ -18,18 +18,18 @@
             <a id="userBtn" class="btn-floating btn-large waves-effect waves-light z-depth-0 indigo lighten-1"><i class="ti ti-2x ti-user"></i></a>    
         </div>
         <div id="topnav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">My Account</a></li>
+            <li><a class="font-semibold" href="/">Home</a></li>
+            <li><a class="font-semibold" href="/dashboard">Dashboard</a></li>
+            <li><a class="font-semibold" href="#">My Account</a></li>
         </div>
     </div>
     <div>
       <hr class="h-0.5 w-11/12 bg-gray-400 mx-auto">
       {% if not request.user.is_authenticated %}
-      <li><a href="/signin"><i class="ti ti-lg ti-login"></i> Sign In</a></li>
-      <li><a href="/signup"><i class="ti ti-lg ti-user-plus"></i> Sign Up</a></li>
+      <li><a class="font-semibold" href="/signin"><i class="ti ti-lg ti-login"></i> Sign In</a></li>
+      <li><a class="font-semibold" href="/signup"><i class="ti ti-lg ti-user-plus"></i> Sign Up</a></li>
       {% else %}
-      <li><a href="/signout"><i class="ti ti-lg ti-logout"></i> Sign Out</a></li>
+      <li><a class="font-semibold" href="/signout"><i class="ti ti-lg ti-logout"></i> Sign Out</a></li>
       {% endif %}
     </div>
   </ul>

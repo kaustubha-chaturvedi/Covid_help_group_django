@@ -26,8 +26,8 @@ def user_signup(request):
             form = SignUpForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                group = Group.objects.get(name="Subscriber") 
-                user.groups.add(group)
+                group = Group.objects.get(name="Subscriber")
+                group.user_set.add(user)
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your ICHG account.'
                 message = render_to_string('auth/email_template.html', {

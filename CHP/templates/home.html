@@ -8,6 +8,11 @@
     topHeight = document.querySelector('#mainNav').clientHeight;
     document.querySelector('.hero').setAttribute('style','top:'+topHeight+'px!important');
 </script>
+{% if messages %}
+    {% for message in messages %}
+        <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
+    {% endfor %}
+{% endif %}
 <div class="grid gap-4 grid-cols-3 mx-4 my-2">
     {% for category in categories %}
     {% if category.is_shown %}

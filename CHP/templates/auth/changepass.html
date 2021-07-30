@@ -2,6 +2,11 @@
 {% load static %}
 {% block navTitle %}Change Password{% endblock navTitle %}
 {% block body %}
+{% if messages %}
+    {% for message in messages %}
+        <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
+    {% endfor %}
+{% endif %}
 <form method="post">
   {% csrf_token %}
   {% for el in form %}

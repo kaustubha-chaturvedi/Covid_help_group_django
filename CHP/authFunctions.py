@@ -75,9 +75,14 @@ def user_login(request):
                 user = authenticate(username=email,password=upass)
                 if user is not None:
                     login(request,user)
+                    messages.error(request,"Loggeg in Successfully")
                     return HttpResponseRedirect('/dashboard')
                 else:
-                    return HttpResponseRedirect('/')    
+                    messages.error(request,"User doesn't exist")
+                    return HttpResponseRedirect('/')
+            else:
+                messages.error(request,"User doesn't exist")
+                return HttpResponseRedirect('/')     
         else:
             form = LoginForm()
             return render(request, 'auth/login.html',{'form':form})
@@ -95,9 +100,10 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return HttpResponseRedirect('/changepass')
+            return HttpResponseRedirect('/dashboard')
         else:
             messages.error(request, 'Please correct the error below.')
+            return HttpResponseRedirect('/changepass')
     else:
         form = ChangePasswordForm(request.user)
     return render(request, 'auth/changepass.html', {'form': form})
@@ -109,7 +115,7 @@ def change_profile(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your Profile was successfully updated!')
-            return HttpResponseRedirect('/changeprof')
+            return HttpResponseRedirect('/dashboard')
         else:
             messages.error(request, 'Please correct the error below.')
             return HttpResponseRedirect('/changeprof')

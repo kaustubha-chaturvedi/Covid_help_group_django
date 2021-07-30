@@ -4,6 +4,7 @@ from django.contrib.auth import *
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.http.request import QueryDict,MultiValueDict
 from django.forms.models import model_to_dict
 
 def searchIcon(request):
@@ -164,19 +165,6 @@ def edit_data(request,category,id):
     else:
         return HttpResponseRedirect('/signin')
 
-def delete_data(request,category,id):
-    if request.user.has_perm('CHP.delete_alldata'):
-        if request.method == 'POST':
-            data = AllData.objects.get(pk=id)
-            data.delete()
-            messages.success(request,'Successfully Deleted Data')
-            return HttpResponseRedirect(f'/manage/{category}')
-        else:
-            messages.success(request,'Data Deletion Unsuccessfull')
-            return HttpResponseRedirect(f'/manage/{category}')
-    else:
-        return HttpResponseRedirect('/signin')
-
 def delete(request,name,id):
     if request.user.has_perm('CHP.delete_'+name):
         if request.method == 'POST':
@@ -199,5 +187,18 @@ def delete(request,name,id):
                 return HttpResponseRedirect('/manage-users')
             else:
                 return HttpResponseRedirect('/dashboard')
+    else:
+        return HttpResponseRedirect('/signin')
+
+def delete_data(request,category,id):
+    if request.user.has_perm('CHP.delete_alldata'):
+        if request.method == 'POST':
+            data = AllData.objects.get(pk=id)
+            data.delete()
+            messages.success(request,'Successfully Deleted Data')
+            return HttpResponseRedirect(f'/manage/{category}')
+        else:
+            messages.success(request,'Data Deletion Unsuccessfull')
+            return HttpResponseRedirect(f'/manage/{category}')
     else:
         return HttpResponseRedirect('/signin')

@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin,Group
 from django.utils.translation import ugettext_lazy as _
+from cloudinary.models import CloudinaryField
 
 
 class UserManager(BaseUserManager):
@@ -62,7 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Categories(models.Model):
     name = models.TextField()
-    icon = models.TextField()
+    icon = CloudinaryField(overwrite=True,)
     # input fields for category
     field1 = models.TextField(null=True,blank=True)
     field2 = models.TextField(null=True,blank=True)

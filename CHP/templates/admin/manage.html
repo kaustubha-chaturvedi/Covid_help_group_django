@@ -42,7 +42,7 @@
             {% for category in categories %}
                 <tr>
                     <td><a href="/edit/categories/{{category.id}}">{{category.name}}</a></td>
-                    <td><a href="/edit/categories/{{category.id}}">{{category.icon}}</a></td>
+                    <td><a href="/edit/categories/{{category.id}}"><img class="mx-auto" src="{{category.icon.url}}" width="25px" height="25px"></img></a></td>
                     <td><a href="/edit/categories/{{category.id}}">{% if category.is_shown %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
                 </tr>
             {% endfor %}

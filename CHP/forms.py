@@ -1,4 +1,5 @@
 from django import forms
+from cloudinary.forms import *
 from django.utils.translation import gettext,gettext_lazy as _
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,UserChangeForm
@@ -56,7 +57,6 @@ class AddCategoryForm(forms.ModelForm):
         ]
         widgets = {
             'name':forms.TextInput(attrs={'placeholder':'Name','class':'validate'}),
-            'icon':forms.TextInput(attrs={'placeholder':'Icon','class':'validate'}),
             'field1':forms.TextInput(attrs={'placeholder':'Field 1 Name','class':'validate'}),
             'field2':forms.TextInput(attrs={'placeholder':'Field 2 Name','class':'validate'}),
             'field3':forms.TextInput(attrs={'placeholder':'Field 3 Name','class':'validate'}),

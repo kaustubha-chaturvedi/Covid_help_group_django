@@ -1,5 +1,6 @@
 from CHP.models import *
 from CHP.forms import *
+from cloudinary.forms import cl_init_js_callbacks
 from django.contrib.auth import *
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from django.contrib import messages
@@ -56,7 +57,7 @@ def add(request,name):
     if request.user.has_perm('CHP.add_'+name):
         if request.method == 'POST':
             if name == 'categories':
-                form = AddCategoryForm(request.POST)
+                form = AddCategoryForm(request.POST,request.FILES)
                 if form.is_valid():
                     form.save()
                     messages.success(request,'Successfully added Category')
@@ -110,7 +111,7 @@ def edit(request,name,id):
         if request.method == 'POST':
             if name == 'categories':
                 data = Categories.objects.get(pk=id)
-                form = AddCategoryForm(request.POST,instance=data)
+                form = AddCategoryForm(request.POST,request.FILES,instance=data)
                 if form.is_valid():
                     form.save()
                     messages.success(request,'Successfully Changed Category')

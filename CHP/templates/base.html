@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load cloudinary %}
 {% load static %}
 <html lang="en">
 <head>
@@ -18,7 +19,6 @@
     </script>
     {% block body %}{% endblock body %}
     <script src="{% static 'js/materialize.min.js' %}"></script>
-    <script src="{% static 'js/alpine.min.js' %}"></script>
 </body>
 <footer style="position: fixed!important;" class="bottom-0 w-full z-50">
 {% block footer %}{% endblock footer %}

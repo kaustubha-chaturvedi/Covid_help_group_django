@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block navTitle %}{{name}}{% endblock navTitle %}
 {% block body %}
+{% load cloudinary %}
 {% if messages %}
     {% for message in messages %}
         <small class="orange accent-2 {% if message.tags %}{{message.tags}}{% endif %}">{{message}}</small>
@@ -88,16 +88,30 @@
     </script>
 </form>
 {% else %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div id="formContent">
     {% for el in form %}
+        {% if el.html_name != 'icon' %}
         <div class="container">
             <div class="input-field">
             {{el}}
             </div>
             <small class="orange accent-2">{{el.errors|striptags}}</small>
         </div>
+        {% else %}
+        <div class="container row">
+            <p class="input-field col s6"> 
+                <img src="{{everyDetail.icon.url}}" alt="">
+            </p>
+            <div class="input-field file-field col s6">
+                <div class="btn ">
+                    <span>Change Icon</span>
+                    <input type="file" name="icon" id="id_icon" accept=".svg">
+                </div>
+            </div>
+        </div>
+        {% endif %}
     {% endfor %}
     </div>
     <div id="formFoot" class="flex justify-between fixed bottom-0 w-full">

@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'CHP',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +80,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ICHG.wsgi.application'
 
+cloudinary.config( 
+  cloud_name = "ichg", 
+  api_key = "389799888348168", 
+  api_secret = "Fc28lh9ua4nVwrJ8DrQ6KKSOXk4" 
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

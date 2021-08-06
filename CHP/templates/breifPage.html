@@ -1,4 +1,35 @@
 {% extends 'base.html' %}
-{% block navTitle %}{{category}}{% endblock navTitle %}
+{% block navTitle %}{{category.name}}{% endblock navTitle %}
 {% block body %}
+    <section class="mx-4 my-4">
+        {% for data in allData %}
+        <a href="" class="no-underline text-black">
+            <div class="border-2 border-green-400 rounded-xl p-2 my-2">
+                <div class="flex justify-between my-2">
+                    <div class="flex">
+                        <div class="rounded-full indigo lighten-1 h-14 w-14 flex justify-center">
+                            <img  src="{{category.icon.url}}" width="25px" height="25px">
+                        </div>
+                        <div class="mx-2">
+                            <span class="text-xl font-semibold">{{data.field1}}</span>
+                            <p class="font-semibold text-gray-400">{{data.field2}}</p>
+                        </div>
+                    </div>
+                    <button class="rounded-full waves-effect waves-light indigo lighten-1 h-14 w-14 flex justify-center p-2">
+                        <i class="ti ti-2x ti-phone"></i>
+                    </button>
+                </div>
+                <hr class="border- border-gray-500 w-10/12 mx-auto">
+                <div class="flex justify-between my-2">
+                    <div class="mx-2">
+                        <span class="text-xl font-semibold">{{data.field1}}</span>
+                    </div>
+                    <div>
+                        <p class="text-gray-600">Near Govt. Hospital</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </section>
 {% endblock body %}

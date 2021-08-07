@@ -16,8 +16,11 @@ def home(request):
 
 def breifPage(request,category):
     allData = AllData.objects.filter(category=Categories.objects.get(name=category))
-    thisCat=Categories.objects.get(name=category)
-    return render(request,'breifPage.html',{'category':thisCat,'allData':allData})
+    return render(request,'breifPage.html',{'allData':allData})
+
+def detailPage(request,category,id):
+    data = AllData.objects.filter(id=id)[0]
+    return render(request,'detailPage.html',{'data':data})
 
 def dashboard(request):
     if request.user.is_authenticated:

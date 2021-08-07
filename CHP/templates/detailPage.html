@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block navTitle %}{{data.category.name}}{% endblock navTitle %}
+{% block body %}
+<div class="grid grid-cols-3 gap-4 text-center">
+    <p class="col-span-2 py-4 mx-4 text-4xl text-left break-all">{{data.field1}}</p>
+    {% if data.is_verified %}
+    <div class="py-6 mx-4">
+        <p class="bg-green-400 p-1 rounded-full font-semibold text-white">Verified</p>
+    </div>
+    {% else %}
+    <div class="py-6 mx-4">
+        <p class="bg-red-400 p-1 rounded-full font-semibold text-white">Not Verified</p>
+    </div>
+    {% endif %}
+</div>
+<hr class="border-2 border-gray-200">
+<div class="mx-auto my-auto">
+    <div class="grid grid-cols-2 gap-4 mt-4">
+        <div>
+            <p class="text-center mt-4">{{data.category.field1}}</p>
+            <p class="text-center mt-4">{{data.category.field2}}</p>
+            <p class="text-center mt-4">{{data.category.field3}}</p>
+            <p class="text-center mt-4">{{data.category.field4}}</p>
+            <p class="text-center mt-4">{{data.category.field5}}</p>
+            <p class="text-center mt-4">{{data.category.field6}}</p>
+            <p class="text-center mt-4">{{data.category.field7}}</p>
+            <p class="text-center mt-4">{{data.category.field8}}</p>
+            <p class="text-center mt-4">{{data.category.field9}}</p>
+            <p class="text-center mt-4">{{data.category.field10}}</p>
+            <p class="text-center mt-4">{{data.category.field11}}</p>
+            <p class="text-center mt-4">{{data.category.field12}}</p>
+            <p class="text-center mt-4">{{data.category.field13}}</p>
+            <p class="text-center mt-4">{{data.category.field14}}</p>
+            <p class="text-center mt-4">{{data.category.field15}}</p>
+            <p class="text-center mt-4">{{data.category.field16}}</p>
+            <p class="text-center mt-4">{{data.category.field17}}</p>
+            <p class="text-center mt-4">{{data.category.field18}}</p>
+            <p class="text-center mt-4">{{data.category.field19}}</p>
+            <p class="text-center mt-4">{{data.category.field20}}</p>
+            <p class="text-center mt-4">{{data.category.field21}}</p>
+            <p class="text-center mt-4">{{data.category.field22}}</p>
+            <p class="text-center mt-4">{{data.category.field23}}</p>
+            <p class="text-center my-4">{{data.category.field24}}</p>
+        </div>
+        <div class="border-l-2 border-gray-400">
+            <p class="text-center font-semibold mt-4">{{data.field1}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field2}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field3}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field4}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field5}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field6}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field7}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field8}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field9}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field10}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field11}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field12}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field13}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field14}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field15}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field16}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field17}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field18}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field19}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field20}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field21}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field22}}</p>
+            <p class="text-center font-semibold mt-4">{{data.field23}}</p>
+            <p class="text-center font-semibold my-4">{{data.field24}}</p>
+        </div>
+    </div>
+</div>
+{% endblock body %}

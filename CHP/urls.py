@@ -33,5 +33,6 @@ adminFunctionsList=[
 genericUrls = [
     path('',home),
     path('breifpage/<str:category>',breifPage),
+    path('detailpage/<str:category>/<int:id>',detailPage),
 ]
 urlpatterns=[path('icons',searchIcon)]+authFunctionsList+genericUrls+adminFunctionsList

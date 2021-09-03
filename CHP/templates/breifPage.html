@@ -12,18 +12,18 @@
                             <img  src="{{data.category.icon.url}}" width="25px" height="25px">
                         </div>
                         <div class="mx-2">
-                            <span class="text-xl font-semibold">{{data.field1}}</span>
-                            <p class="font-semibold text-gray-400">Near Govt. Hospital</p>
+                            <span class="text-xl font-semibold">{{data.name}}</span>
+                            <p class="font-semibold text-gray-400">{{data.landmark}}</p>
                         </div>
                     </div>
                     <button class="hover:bg-transparent focus:outline-none focus:bg-transparent flex justify-center p-2">
                         <i class="ti ti-2x ti-phone"></i>
                     </button>
                 </div>
-                <hr class="border- border-gray-500 w-10/12 mx-auto">
+                <hr class="border border-gray-500 w-10/12 mx-auto">
                 <div class="flex justify-between my-2">
                     <div class="mx-2">
-                        <span class="text-xl font-semibold">{{data.field2}}</span>
+                        <span class="text-xl font-semibold">{{data.city}}</span>
                     </div>
                     <div>
                         <p class="font-semibold text-white p-1 rounded-full {% if data.is_verified %}bg-green-400{% else %}bg-red-400{% endif %}">

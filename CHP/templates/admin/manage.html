@@ -19,7 +19,7 @@
                 <th>Icon</th>
                 <th>Visible</th>
             {% elif alldata %}
-                <th>{{category.field1}}</th>
+                <th>Name</th>
                 <th>Verified</th>
                 <th>Visible</th>
             {% endif %}
@@ -49,7 +49,7 @@
         {% elif alldata %}
             {% for data in alldata %}
                 <tr>
-                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.field1}}</a></td>
+                    <td><a href="/editData/{{data.category}}/{{data.id}}">{{data.name}}</a></td>
                     <td><a href="/editData/{{data.category}}/{{data.id}}">{% if data.is_verified %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
                     <td><a href="/editData/{{data.category}}/{{data.id}}">{% if data.is_shown %}<i class="ti ti-lg text-green-400 ti-check"></i>{% else %}<i class="ti ti-lg text-red-400 ti-x"></i>{% endif %}</a></td>
                 </tr>

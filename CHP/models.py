@@ -1,3 +1,4 @@
+from ICHG.settings import STATE_LIST
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
@@ -85,10 +86,6 @@ class Categories(models.Model):
     field18 = models.TextField(null=True,blank=True)
     field19 = models.TextField(null=True,blank=True)
     field20 = models.TextField(null=True,blank=True)
-    field21 = models.TextField(null=True,blank=True)
-    field22 = models.TextField(null=True,blank=True)
-    field23 = models.TextField(null=True,blank=True)
-    field24 = models.TextField(null=True,blank=True)
     is_shown = models.BooleanField(default=True)
     class Meta: 
         verbose_name = "Category"
@@ -99,6 +96,22 @@ class Categories(models.Model):
 
 class AllData(models.Model):
     category = models.ForeignKey(Categories,related_name="category",on_delete=models.SET_NULL,null=True)
+    name = models.TextField(null=True,blank=True)
+    phone1 = models.TextField(null=True,blank=True)
+    phone2 = models.TextField(null=True,blank=True)
+    phone3 = models.TextField(null=True,blank=True)
+    email = models.EmailField(null=True,blank=True)
+    website = models.URLField(null=True,blank=True)
+    address = models.TextField(null=True,blank=True)
+    landmark = models.TextField(null=True,blank=True)
+    pincode = models.IntegerField(null=True,blank=True)
+    city = models.TextField(null=True,blank=True)
+    state = models.CharField(
+        max_length=30,
+        choices=STATE_LIST,
+        default='DL'
+    )
+    mapUrl = models.URLField(null=True,blank=True)
     field1 = models.TextField(null=True,blank=True)
     field2 = models.TextField(null=True,blank=True)
     field3 = models.TextField(null=True,blank=True)
@@ -119,9 +132,5 @@ class AllData(models.Model):
     field18 = models.TextField(null=True,blank=True)
     field19 = models.TextField(null=True,blank=True)
     field20 = models.TextField(null=True,blank=True)
-    field21 = models.TextField(null=True,blank=True)
-    field22 = models.TextField(null=True,blank=True)
-    field23 = models.TextField(null=True,blank=True)
-    field24 = models.TextField(null=True,blank=True)
     is_verified = models.BooleanField(default=False)
     is_shown = models.BooleanField(default=False)

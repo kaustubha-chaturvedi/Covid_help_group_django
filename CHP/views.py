@@ -98,9 +98,12 @@ def add_data(request,category):
         else:
             dataField = {}
             for k,v in model_to_dict(Categories.objects.get(name=category)).items():
-                if k not in ['','id','name','icon'] and v!='':
+                if k not in ['','id','icon'] and v!='':
                     dataField[k]=v
             form = AddDataForm()
+            dataField['name'],dataField['phone1'],dataField['phone2'],dataField['phone3']="Name","Phone Number","2nd Phone Number","3rd Phone Number",
+            dataField['email'],dataField['address1'],dataField['pincode'],dataField['city']="Email","Address","Pincode","City",
+            dataField['state'],dataField['website'],dataField['mapUrl']="","Website","Map Location Link"
             return render(request,'admin/add_edit.html',{
                                         'name':f'Add Data','form':form,
                                         'dataField':dataField,'categoryId':Categories.objects.get(name=category).id,
@@ -162,6 +165,9 @@ def edit_data(request,category,id):
                     dataField[k]=v
             data = AllData.objects.get(pk=id)
             form = AddDataForm(instance=data)
+            dataField['name'],dataField['phone1'],dataField['phone2'],dataField['phone3']="Name","Phone Number","2nd Phone Number","3rd Phone Number",
+            dataField['email'],dataField['address'],dataField['landmark'],dataField['pincode'],dataField['city']="Email","Address","Landmark","Pincode","City",
+            dataField['state'],dataField['website'],dataField['mapUrl']="","Website","Map Location Link"
             return render(request,'admin/add_edit.html',{
                                         'name':f'Edit Data','form':form,
                                         'dataField':dataField,'categoryId':Categories.objects.get(name=category).id,

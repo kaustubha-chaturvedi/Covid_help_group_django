@@ -46,14 +46,14 @@ class AdminUserChangeForm(UserChangeForm):
         model = User
         fields = {'is_superuser','is_active','is_staff','usergroup'}
         labels = {'is_superuser':'Set Admin','is_active':'Set Active','is_staff':'Make Staff Member'}
+        
 class AddCategoryForm(forms.ModelForm):
     class Meta:
         model = Categories
         fields = [
             'name', 'icon', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7',
             'field8', 'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15',
-            'field16', 'field17', 'field18', 'field19', 'field20', 'field21',
-            'field22', 'field23', 'field24','is_shown'
+            'field16', 'field17', 'field18', 'field19', 'field20','is_shown'
         ]
         widgets = {
             'name':forms.TextInput(attrs={'placeholder':'Name','class':'validate'}),
@@ -77,10 +77,6 @@ class AddCategoryForm(forms.ModelForm):
             'field18':forms.TextInput(attrs={'placeholder':'Field 18 Name','class':'validate'}),
             'field19':forms.TextInput(attrs={'placeholder':'Field 19 Name','class':'validate'}),
             'field20':forms.TextInput(attrs={'placeholder':'Field 20 Name','class':'validate'}),
-            'field21':forms.TextInput(attrs={'placeholder':'Field 21 Name','class':'validate'}),
-            'field22':forms.TextInput(attrs={'placeholder':'Field 22 Name','class':'validate'}),
-            'field23':forms.TextInput(attrs={'placeholder':'Field 23 Name','class':'validate'}),
-            'field24':forms.TextInput(attrs={'placeholder':'Field 24 Name','class':'validate'}),
             'is_shown':forms.Select(choices=((True,'Visible'),(False,'Hidden'))),
         }
 
@@ -90,11 +86,22 @@ class AddDataForm(forms.ModelForm):
     class Meta:
         model = AllData
         fields = [
-            'category','field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7','field8',
-            'field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15','field16','field17',
-            'field18', 'field19', 'field20', 'field21','field22', 'field23', 'field24','is_shown','is_verified'
+            'category','name','phone1','phone2','phone3','email','website','address','landmark','pincode','city','state','mapUrl','field1', 'field2', 'field3',
+            'field4', 'field5', 'field6', 'field7','field8','field9', 'field10', 'field11', 'field12', 'field13', 'field14', 'field15','field16',
+            'field17','field18', 'field19', 'field20','is_shown','is_verified'
         ]
         widgets={
+            'name':forms.TextInput(attrs={'class':'validate'}),
+            'phone1':forms.TextInput(attrs={'class':'validate'}),
+            'phone2':forms.TextInput(attrs={'class':'validate'}),
+            'phone3':forms.TextInput(attrs={'class':'validate'}),
+            'email':forms.EmailInput(attrs={'class':'validate'}),
+            'website':forms.URLInput(attrs={'class':'validate'}),
+            'address':forms.TextInput(attrs={'class':'validate'}),
+            'landmark':forms.TextInput(attrs={'class':'validate'}),
+            'pincode':forms.NumberInput(attrs={'class':'validate'}),
+            'city':forms.TextInput(attrs={'class':'validate'}),
+            'mapUrl':forms.URLInput(attrs={'class':'validate'}),
             'is_verified':forms.Select(choices=((True,'Verified'),(False,'Unverified'))),
             'is_shown':forms.Select(choices=((True,'Visible'),(False,'Hidden'))),
         }

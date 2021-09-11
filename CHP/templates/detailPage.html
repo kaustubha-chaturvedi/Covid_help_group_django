@@ -5,18 +5,21 @@
     <p class="col-span-2 py-4 mx-4 text-4xl text-left break-all">{{data.field1}}</p>
     {% if data.is_verified %}
     <div class="py-6 mx-4">
-        <p class="bg-green-400 p-1 rounded-full font-semibold text-white">Verified</p>
+        <p class="bg-green-400 p-1 rounded-full border-4 font-semibold border-green-600">Verified</p>
     </div>
     {% else %}
     <div class="py-6 mx-4">
-        <p class="bg-red-400 p-1 rounded-full font-semibold text-white">Not Verified</p>
+        <p class="bg-red-400 p-1 rounded-full font-semibold border-green-600">Not Verified</p>
     </div>
     {% endif %}
 </div>
-<hr class="border-2 border-gray-200">
+<hr class="border-2 border-white bg-clip-padding">
+<section>
 <div class="mx-auto my-auto">
+<div class="box-border h-100 w-50 display: flex; p-4 border-4 border-blue-200 ">
     <div class="grid grid-cols-2 gap-4 mt-4">
         <div>
+        <p class="text-lg ...">
             <p class="text-center mt-4">{{data.category.field1}}</p>
             <p class="text-center mt-4">{{data.category.field2}}</p>
             <p class="text-center mt-4">{{data.category.field3}}</p>
@@ -42,7 +45,7 @@
             <p class="text-center mt-4">{{data.category.field23}}</p>
             <p class="text-center my-4">{{data.category.field24}}</p>
         </div>
-        <div class="border-l-2 border-gray-400">
+        <div class="border-l-2 border-white">
             <p class="text-center font-semibold mt-4">{{data.field1}}</p>
             <p class="text-center font-semibold mt-4">{{data.field2}}</p>
             <p class="text-center font-semibold mt-4">{{data.field3}}</p>
@@ -67,7 +70,10 @@
             <p class="text-center font-semibold mt-4">{{data.field22}}</p>
             <p class="text-center font-semibold mt-4">{{data.field23}}</p>
             <p class="text-center font-semibold my-4">{{data.field24}}</p>
+            </p>
         </div>
     </div>
+    </div>
 </div>
+</section>
 {% endblock body %}

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/tabler-icons.min.css' %}">
     <title>ICGH</title>
 </head>
-<body>
+<body class="desktopOrPhone">
     {% include 'partials/nav.html' %}
     <script>
         document.querySelector('a[id="appTitle"]').innerHTML="{% block navTitle %}{% endblock navTitle %}"
@@ -20,7 +20,7 @@
     {% block body %}{% endblock body %}
     <script src="{% static 'js/materialize.min.js' %}"></script>
 </body>
-<footer style="position: fixed!important;" class="bottom-0 w-full z-50">
+<footer style="position: fixed!important;" class="bottom-0 desktopOrPhone w-full z-50">
 {% block footer %}{% endblock footer %}
 </footer>
 </html>

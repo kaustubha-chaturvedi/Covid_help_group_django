@@ -16,3 +16,12 @@
 .ti-9x{font-size: 9em!important;}
 .ti-10x{font-size: 10em!important;}
 /* tabler resizing option */
+
+@media (min-width:416px) {
+    .desktopOrPhone{
+        max-width: 416px!important;
+    }
+    .sidenav-trigger{
+        display: block!important;
+    }
+}

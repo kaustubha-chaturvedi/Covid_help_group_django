@@ -2,78 +2,188 @@
 {% block navTitle %}{{data.category.name}}{% endblock navTitle %}
 {% block body %}
 <div class="grid grid-cols-3 gap-4 text-center">
-    <p class="col-span-2 py-4 mx-4 text-4xl text-left break-all">{{data.field1}}</p>
+    <p class="col-span-2 py-4 mx-4 text-3xl text-left">{{data.name}}<br><span class="text-base">{{data.landmark}}</span></p>
     {% if data.is_verified %}
     <div class="py-6 mx-4">
-        <p class="bg-green-400 p-1 rounded-full border-4 font-semibold border-green-600">Verified</p>
+        <p class="bg-green-300 p-1 rounded-full font-semibold">Verified</p>
     </div>
     {% else %}
     <div class="py-6 mx-4">
-        <p class="bg-red-400 p-1 rounded-full font-semibold border-green-600">Not Verified</p>
+        <p class="bg-red-300 p-1 rounded-full font-semibold">Not Verified</p>
     </div>
     {% endif %}
 </div>
-<hr class="border-2 border-white bg-clip-padding">
 <section>
-<div class="mx-auto my-auto">
-<div class="box-border h-100 w-50 display: flex; p-4 border-4 border-blue-200 ">
-    <div class="grid grid-cols-2 gap-4 mt-4">
-        <div>
-        <p class="text-lg ...">
-            <p class="text-center mt-4">{{data.category.field1}}</p>
-            <p class="text-center mt-4">{{data.category.field2}}</p>
-            <p class="text-center mt-4">{{data.category.field3}}</p>
-            <p class="text-center mt-4">{{data.category.field4}}</p>
-            <p class="text-center mt-4">{{data.category.field5}}</p>
-            <p class="text-center mt-4">{{data.category.field6}}</p>
-            <p class="text-center mt-4">{{data.category.field7}}</p>
-            <p class="text-center mt-4">{{data.category.field8}}</p>
-            <p class="text-center mt-4">{{data.category.field9}}</p>
-            <p class="text-center mt-4">{{data.category.field10}}</p>
-            <p class="text-center mt-4">{{data.category.field11}}</p>
-            <p class="text-center mt-4">{{data.category.field12}}</p>
-            <p class="text-center mt-4">{{data.category.field13}}</p>
-            <p class="text-center mt-4">{{data.category.field14}}</p>
-            <p class="text-center mt-4">{{data.category.field15}}</p>
-            <p class="text-center mt-4">{{data.category.field16}}</p>
-            <p class="text-center mt-4">{{data.category.field17}}</p>
-            <p class="text-center mt-4">{{data.category.field18}}</p>
-            <p class="text-center mt-4">{{data.category.field19}}</p>
-            <p class="text-center mt-4">{{data.category.field20}}</p>
-            <p class="text-center mt-4">{{data.category.field21}}</p>
-            <p class="text-center mt-4">{{data.category.field22}}</p>
-            <p class="text-center mt-4">{{data.category.field23}}</p>
-            <p class="text-center my-4">{{data.category.field24}}</p>
-        </div>
-        <div class="border-l-2 border-white">
-            <p class="text-center font-semibold mt-4">{{data.field1}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field2}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field3}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field4}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field5}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field6}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field7}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field8}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field9}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field10}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field11}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field12}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field13}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field14}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field15}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field16}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field17}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field18}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field19}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field20}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field21}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field22}}</p>
-            <p class="text-center font-semibold mt-4">{{data.field23}}</p>
-            <p class="text-center font-semibold my-4">{{data.field24}}</p>
-            </p>
-        </div>
-    </div>
-    </div>
+<div class="flex flex-row mx-2">
+    {% if data.website %}
+    <a target="_blank" href="{{data.website}}" class="btn-floating waves-effect waves-light blue darken-1 ml-2 my-2" style="text-transform:none!important;">
+        <i class="ti ti-2x ti-world"></i>
+    </a>
+    {% endif %}
+    {% if data.mapUrl %}
+    <a target="_blank" href="{{data.mapUrl}}" class="btn-floating waves-effect waves-light blue darken-1 ml-2 my-2" style="text-transform:none!important;">
+        <i class="ti ti-2x ti-map-2"></i>
+    </a>
+    {% endif %}
+    {% if data.email %}
+    <a target="_blank" href="mailto:{{data.email}}" class="btn-floating waves-effect waves-light blue darken-1 ml-2 my-2" style="text-transform:none!important;">
+        <i class="ti ti-2x ti-mail"></i>
+    </a>
+    {% endif %}
 </div>
+<div class="m-2">
+    {% if data.phone1 %}
+        <div class="border-2 border-green-400 rounded-xl p-2 my-2 w-full">
+            <a href="tel:{{data.phone1}}" class="flex flex-row justify-between">
+            <span class="text-black mx-4 ti-lg font-semibold">{{data.phone1}}</span>
+            <i class="ti ti-2x ti-phone mx-4"></i>
+            </a>
+        </div>
+    {% endif %}
+    {% if data.phone2 %}
+        <div class="border-2 border-green-400 rounded-xl p-2 my-2 w-full">
+            <a href="tel:{{data.phone2}}" class="flex flex-row justify-between">
+            <span class="text-black mx-4 ti-lg font-semibold">{{data.phone2}}</span>
+            <i class="ti ti-2x ti-phone mx-4"></i>
+            </a>
+        </div>
+    {% endif %}
+    {% if data.phone3 %}
+        <div class="border-2 border-green-400 rounded-xl p-2 my-2 w-full">
+            <a href="tel:{{data.phone3}}" class="flex flex-row justify-between">
+            <span class="text-black mx-4 ti-lg font-semibold">{{data.phone3}}</span>
+            <i class="ti ti-2x ti-phone mx-4"></i>
+            </a>
+        </div>
+    {% endif %}
+</div>
+<p class="m-4">
+    <span class="font-semibold">Address :</span>
+    {{data.address}}, {{data.landmark}},
+    <br>{{data.city}}, {{data.get_state_display}}, {{data.pincode}}
+</p>
+</section>
+<hr>
+<section id="dynamic_fields">
+    {% if data.field1 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field1}} :</span>
+        {{data.field1}}
+    </p>
+    {% endif %}
+    {% if data.field2 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field2}} :</span>
+        {{data.field2}}
+    </p>
+    {% endif %}
+    {% if data.field3 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field3}} :</span>
+        {{data.field3}}
+    </p>
+    {% endif %}
+    {% if data.field4 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field4}} :</span>
+        {{data.field4}}
+    </p>
+    {% endif %}
+    {% if data.field5 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field5}} :</span>
+        {{data.field5}}
+    </p>
+    {% endif %}
+    {% if data.field6 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field6}} :</span>
+        {{data.field6}}
+    </p>
+    {% endif %}
+    {% if data.field7 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field7}} :</span>
+        {{data.field7}}
+    </p>
+    {% endif %}
+    {% if data.field8 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field8}} :</span>
+        {{data.field8}}
+    </p>
+    {% endif %}
+    {% if data.field9 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field9}} :</span>
+        {{data.field9}}
+    </p>
+    {% endif %}
+    {% if data.field10 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field10}} :</span>
+        {{data.field10}}
+    </p>
+    {% endif %}
+    {% if data.field11 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field11}} :</span>
+        {{data.field11}}
+    </p>
+    {% endif %}
+    {% if data.field12 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field12}} :</span>
+        {{data.field12}}
+    </p>
+    {% endif %}
+    {% if data.field13 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field13}} :</span>
+        {{data.field13}}
+    </p>
+    {% endif %}
+    {% if data.field14 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field14}} :</span>
+        {{data.field14}}
+    </p>
+    {% endif %}
+    {% if data.field15 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field15}} :</span>
+        {{data.field15}}
+    </p>
+    {% endif %}
+    {% if data.field16 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field16}} :</span>
+        {{data.field16}}
+    </p>
+    {% endif %}
+    {% if data.field17 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field17}} :</span>
+        {{data.field17}}
+    </p>
+    {% endif %}
+    {% if data.field18 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field18}} :</span>
+        {{data.field18}}
+    </p>
+    {% endif %}
+    {% if data.field19 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field19}} :</span>
+        {{data.field19}}
+    </p>
+    {% endif %}
+    {% if data.field20 %}
+    <p class="m-4">
+        <span class="font-semibold">{{data.category.field20}} :</span>
+        {{data.field20}}
+    </p>
+    {% endif %}
 </section>
 {% endblock body %}

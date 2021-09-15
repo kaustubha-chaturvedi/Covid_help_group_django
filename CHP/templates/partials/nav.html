@@ -4,11 +4,6 @@
       <a href="#" data-target="mobile-demo" class="sidenav-trigger text-black"><i class="ti ti-menu-2"></i></a>
       <a href="#!" id="appTitle" class="text-2xl text-black md:px-4">ICHG</a>
       </div>
-      <ul class="hide-on-med-and-down p-4">
-          <li class="font-semibold"><a href="/">Home</a></li>
-          <li class="font-semibold"><a href="/dashboard">Dashboard</a></li>
-          <li class="font-semibold"><a href="/changeprof">My Account</a></li>
-      </ul>
     </div>
   </nav>
 
@@ -19,8 +14,10 @@
         </div>
         <div id="topnav">
             <li><a class="font-semibold" href="/">Home</a></li>
+            {% if request.user.is_authenticated %}
             <li><a class="font-semibold" href="/dashboard">Dashboard</a></li>
             <li><a class="font-semibold" href="/changeprof">My Account</a></li>
+            {% endif %}
         </div>
     </div>
     <div>

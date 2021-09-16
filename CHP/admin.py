@@ -62,4 +62,7 @@ class CategoriesModelAdmin(admin.ModelAdmin):
 
 @admin.register(AllData)
 class AllDataAdmin(admin.ModelAdmin):
-    list_display=['category','id','field1','is_verified','is_shown']
+    list_display=['name','category','id','is_verified','is_shown']
+    list_filter=['category','is_verified']
+    search_fields=['name']
+    list_per_page=10

@@ -8,9 +8,6 @@ from django.http import JsonResponse
 from django.http.request import QueryDict,MultiValueDict
 from django.forms.models import model_to_dict
 
-def searchIcon(request):
-    return render(request,'tabler-icons.html')
-
 def home(request):
     return render(request,'home.html',{'categories':Categories.objects.all()})
 

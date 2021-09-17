@@ -35,4 +35,4 @@ genericUrls = [
     path('breifpage/<str:category>',breifPage),
     path('detailpage/<str:category>/<int:id>',detailPage),
 ]
-urlpatterns=[path('icons',searchIcon)]+authFunctionsList+genericUrls+adminFunctionsList
+urlpatterns=authFunctionsList+genericUrls+adminFunctionsList

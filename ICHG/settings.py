@@ -33,8 +33,8 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "CHP.User"
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ichgtechteam@gmail.com'
-EMAIL_HOST_PASSWORD = 'zgyrlrocwntiuaxy'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 
 # Application definition
@@ -81,9 +81,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ICHG.wsgi.application'
 
 cloudinary.config( 
-  cloud_name = "ichg", 
-  api_key = "389799888348168", 
-  api_secret = "Fc28lh9ua4nVwrJ8DrQ6KKSOXk4" 
+  cloud_name = "", 
+  api_key = "", 
+  api_secret = "" 
 )
 
 STATE_LIST =(

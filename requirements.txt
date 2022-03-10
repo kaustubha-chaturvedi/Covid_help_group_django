@@ -3,7 +3,7 @@ astroid==2.6.2
 certifi==2021.5.30
 cloudinary==1.26.0
 colorama==0.4.4
-Django==3.2.4
+Django==3.2.12
 django-cors-headers==3.7.0
 isort==5.9.2
 lazy-object-proxy==1.6.0
